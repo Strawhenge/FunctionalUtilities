@@ -2,6 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Matt Bristow</Authors>
+    <Company>Strawhenge</Company>
+    <Description>Some useful objects for functional design patterns</Description>
   </PropertyGroup>
 
   <ItemGroup>
