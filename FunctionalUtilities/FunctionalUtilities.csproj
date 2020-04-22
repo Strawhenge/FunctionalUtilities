@@ -5,6 +5,7 @@
     <Authors>Matt Bristow</Authors>
     <Company>Strawhenge</Company>
     <Description>Some useful objects for functional design patterns</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
