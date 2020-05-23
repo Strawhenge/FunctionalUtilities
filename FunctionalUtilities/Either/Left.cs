@@ -8,6 +8,8 @@ namespace FunctionalUtilities
 
         public Left(TLeft value)
         {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+
             this.value = value;
         }
 

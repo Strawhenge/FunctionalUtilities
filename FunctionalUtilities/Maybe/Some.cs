@@ -8,6 +8,8 @@ namespace FunctionalUtilities
 
         public Some(T value)
         {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+
             this.value = value;
         }
 
