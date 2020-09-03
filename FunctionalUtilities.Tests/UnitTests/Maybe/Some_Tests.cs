@@ -45,5 +45,13 @@ namespace FunctionalUtilities.Tests.UnitTests
             Assert.NotNull(actual);
             Assert.Equal(expected, actual);
         }
+
+        [Fact]
+        public void ImplicitOperator_ShouldCastToMaybe()
+        {
+            Maybe<Exception> maybe = new Exception();
+
+            AssertMaybe.Some(maybe);
+        }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace FunctionalUtilities
 {
-    public abstract class Either<TLeft, TRight>
+    public abstract partial class Either<TLeft, TRight>
     {
         public abstract Either<TNewLeft, TRight> MapLeft<TNewLeft>(Func<TLeft, TNewLeft> mapping);
 
