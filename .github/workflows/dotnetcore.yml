@@ -24,6 +24,9 @@ jobs:
     - name: Build
       run: dotnet build -p:Version=1.0.${{ github.run_number }} --configuration Release
     
+    - name: Test
+      run: dotnet test
+    
     - name: Pack
       run: dotnet pack -c Release -p:PackageVersion=1.0.${{ github.run_number }} -o nupkg
     
