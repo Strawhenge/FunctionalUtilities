@@ -13,6 +13,12 @@ namespace FunctionalUtilities
             this.value = value;
         }
 
+        public override void DoLeft(Action<TLeft> action)
+        {
+        }
+
+        public override void DoRight(Action<TRight> action) => action(value);
+
         public override Either<TNewLeft, TRight> MapLeft<TNewLeft>(Func<TLeft, TNewLeft> mapping) =>
             new Right<TNewLeft, TRight>(value);
 

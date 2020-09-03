@@ -2,7 +2,7 @@
 
 namespace FunctionalUtilities
 {
-    public abstract class Maybe<T>
+    public abstract partial class Maybe<T>
     {
         public abstract void Do(Action<T> action);
 
