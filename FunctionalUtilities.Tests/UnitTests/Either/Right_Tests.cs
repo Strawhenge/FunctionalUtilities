@@ -20,6 +20,28 @@ namespace FunctionalUtilities.Tests.UnitTests
         }
 
         [Fact]
+        public void DoLeft_ShouldNotInvokeAction()
+        {
+            bool hasInvoked = false;
+
+            var subject = Either.Right<string, object>(new object());
+            subject.DoLeft(_ => hasInvoked = true);
+
+            Assert.False(hasInvoked);
+        }
+
+        [Fact]
+        public void DoRight_ShouldInvokeAction()
+        {
+            bool hasInvoked = false;
+
+            var subject = Either.Right<string, object>(new object());
+            subject.DoRight(_ => hasInvoked = true);
+
+            Assert.True(hasInvoked);
+        }
+
+        [Fact]
         public void ImplicitOperator_ShouldCastRighttTypeToEither()
         {
             Either<object, Exception> either = new Exception();

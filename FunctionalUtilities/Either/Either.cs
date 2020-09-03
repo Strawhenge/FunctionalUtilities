@@ -8,6 +8,10 @@ namespace FunctionalUtilities
 
         public abstract Either<TLeft, TNewRight> MapRight<TNewRight>(Func<TRight, TNewRight> mapping);
 
+        public abstract void DoLeft(Action<TLeft> action);
+
+        public abstract void DoRight(Action<TRight> action);
+
         public abstract TLeft ReduceLeft(Func<TRight, TLeft> reducer);
 
         public abstract TRight ReduceRight(Func<TLeft, TRight> reducer);
