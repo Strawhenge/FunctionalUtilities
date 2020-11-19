@@ -1,7 +1,7 @@
 ﻿using FunctionalUtilities;
 using System;
 
-public static class MaybeExtensions
+public static partial class MaybeExtensions
 {
     public static T? ToNullable<T>(this Maybe<T> maybe) where T : struct => maybe
         .Map<T?>(x => x)
