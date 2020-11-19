@@ -1,0 +1,72 @@
+﻿using System;
+using Xunit;
+
+namespace FunctionalUtilities.Tests.UnitTests.MaybeExtensions
+{
+    public class SingleOrNone_Tests
+    {
+        [Fact]
+        public void SingleOrNone_GivenSequenceIsEmpty_ShouldReturnNone()
+        {
+            var subject = new int[0];
+
+            var result = subject.SingleOrNone();
+            var result2 = subject.SingleOrNone(x => true);
+            var result3 = subject.SingleOrNone(x => false);
+
+            AssertMaybe.IsNone(result);
+            AssertMaybe.IsNone(result2);
+            AssertMaybe.IsNone(result3);
+        }
+
+        [Fact]
+        public void SingleOrNone_GivenSequenceHasOneItem_ShouldReturnSome()
+        {
+            var subject = new int[] { 10 };
+
+            var result = subject.SingleOrNone();
+
+            AssertMaybe.IsSome(result);
+            Assert.Equal(10, result.ReduceUnsafe());
+        }
+
+        [Fact]
+        public void SingleOrNone_GivenSequenceHasMoreThanOneElement_ShouldThrow()
+        {
+            var subject = new int[] { 1, 0 };
+
+            Assert.Throws<InvalidOperationException>(
+                () => subject.SingleOrNone());
+        }
+
+        [Fact]
+        public void SingleOrNone_GivenSequenceHasMoreThanOneElement_AndPredicateDoesNotMatch_ShouldReturnNone()
+        {
+            var subject = new int[] { 1, 0 };
+
+            var result = subject.SingleOrNone(x => false);
+
+            AssertMaybe.IsNone(result);
+        }
+
+        [Fact]
+        public void SingleOrNone_GivenPredicateMatchesOneElement_ShouldReturnSome()
+        {
+            var subject = new int[] { 1, 6, 3 };
+
+            var result = subject.SingleOrNone(x => x == 6);
+
+            AssertMaybe.IsSome(result);
+            Assert.Equal(6, result.ReduceUnsafe());
+        }
+
+        [Fact]
+        public void SingleOrNone_GivenPredicateMatchesMoreThanOneElement_ShouldThrow()
+        {
+            var subject = new int[] { 1, 1, 0 };
+
+            Assert.Throws<InvalidOperationException>(
+                () => subject.SingleOrNone(x => x == 1));
+        }
+    }
+}

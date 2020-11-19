@@ -23,11 +23,17 @@ public static partial class MaybeExtensions
     {
         if (!enumerable.Any(predicate)) return Maybe.None<T>();
 
-        var value = enumerable.First(predicate);
+        return enumerable.First(predicate);
+    }
 
-        return value == null
-            ? Maybe.None<T>()
-            : Maybe.Some(value);
+    public static Maybe<T> SingleOrNone<T>(this IEnumerable<T> enumerable) =>
+        enumerable.SingleOrNone(x => true);
+
+    public static Maybe<T> SingleOrNone<T>(this IEnumerable<T> enumerable, Func<T, bool> predicate)
+    {
+        if (!enumerable.Any(predicate)) return Maybe.None<T>();
+
+        return enumerable.Single(predicate);
     }
 
     public static IEnumerable<T> AsEnumerable<T>(this Maybe<T> maybe)
