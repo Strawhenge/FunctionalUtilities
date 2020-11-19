@@ -29,4 +29,16 @@ public static partial class MaybeExtensions
             ? Maybe.None<T>()
             : Maybe.Some(value);
     }
+
+    public static IEnumerable<T> AsEnumerable<T>(this Maybe<T> maybe)
+    {
+        return maybe
+            .Map(x => GetEnumerable(x))
+            .Reduce(() => Enumerable.Empty<T>());
+
+        IEnumerable<T> GetEnumerable(T value)
+        {
+            yield return value;
+        }
+    }
 }
