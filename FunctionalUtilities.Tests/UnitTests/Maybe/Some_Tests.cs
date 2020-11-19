@@ -51,7 +51,7 @@ namespace FunctionalUtilities.Tests.UnitTests
         {
             Maybe<Exception> maybe = new Exception();
 
-            AssertMaybe.Some(maybe);
+            AssertMaybe.IsSome(maybe);
         }
     }
 }
