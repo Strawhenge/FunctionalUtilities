@@ -2,7 +2,7 @@
 
 namespace FunctionalUtilities.Tests.UnitTests.MaybeExtensions
 {
-    public class MaybeExtensions_ElementAtOrNone_Tests
+    public class ElementAtOrNone_Tests
     {
         [Theory]
         [InlineData(0)]

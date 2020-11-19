@@ -2,7 +2,7 @@
 
 namespace FunctionalUtilities.Tests.UnitTests.MaybeExtensions
 {
-    public class MaybeExtensions_FirstOrNone_Tests
+    public class FirstOrNone_Tests
     {
         [Fact]
         public void FirstOrNone_GivenSequenceIsEmpty_ShouldReturnNone()

@@ -3,7 +3,7 @@ using Xunit;
 
 namespace FunctionalUtilities.Tests.UnitTests.MaybeExtensions
 {
-    public class MaybeExtensions_AsEnumerable_Tests
+    public class AsEnumerable_Tests
     {
         [Fact]
         public void AsEnumerable_GivenNone_ShouldReturnEmptyEnumerable()
