@@ -17,6 +17,14 @@ public static partial class MaybeExtensions
         .Map(_ => true)
         .Reduce(() => false);
 
+    public static bool HasSome<T>(this Maybe<T> maybe, out T some)
+    {
+        some = maybe
+            .Reduce(() => default);
+
+        return maybe.HasValue();
+    }
+
     public static T ReduceUnsafe<T>(this Maybe<T> maybe) => maybe.Reduce(
         () => throw new InvalidOperationException($"Cannot reduce value from {maybe.GetType().Name}"));
 }
