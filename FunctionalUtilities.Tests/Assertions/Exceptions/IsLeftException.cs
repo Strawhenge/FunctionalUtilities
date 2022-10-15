@@ -2,7 +2,7 @@
 
 namespace FunctionalUtilities.Tests
 {
-    internal class IsLeftException : AssertActualExpectedException
+    class IsLeftException : AssertActualExpectedException
     {
         public IsLeftException(object left) : base("Right", "Left", "Expected Right but was Left.")
         {

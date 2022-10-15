@@ -20,7 +20,7 @@ namespace FunctionalUtilities.Tests.UnitTests.MaybeExtensions
         public void AsEnumerable_GivenSoMe_ShouldReturnEnumerableWithSingleItem()
         {
             var item = new object();
-            var subject = Maybe.Some<object>(item);
+            var subject = Maybe.Some(item);
 
             var result = subject.AsEnumerable();
 

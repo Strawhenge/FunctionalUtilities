@@ -2,7 +2,7 @@
 
 namespace FunctionalUtilities
 {
-    internal sealed class None<T> : Maybe<T>
+    sealed class None<T> : Maybe<T>
     {
         public override void Do(Action<T> action)
         {
