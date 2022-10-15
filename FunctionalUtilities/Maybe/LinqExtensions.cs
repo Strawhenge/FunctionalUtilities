@@ -9,11 +9,11 @@ public static partial class MaybeExtensions
     {
         if (index < 0) return Maybe.None<T>();
 
-        var count = enumerable.Count();
+        var array = enumerable.ToArray();
 
-        return index >= count
+        return index >= array.Length
             ? Maybe.None<T>()
-            : Maybe.Some(enumerable.ElementAt(index));
+            : Maybe.Some(array[index]);
     }
 
     public static Maybe<T> FirstOrNone<T>(this IEnumerable<T> enumerable) =>
@@ -21,9 +21,11 @@ public static partial class MaybeExtensions
 
     public static Maybe<T> FirstOrNone<T>(this IEnumerable<T> enumerable, Func<T, bool> predicate)
     {
-        if (!enumerable.Any(predicate)) return Maybe.None<T>();
+        var array = enumerable.ToArray();
 
-        return enumerable.First(predicate);
+        return array.Any(predicate)
+            ? array.First(predicate)
+            : Maybe.None<T>();
     }
 
     public static Maybe<T> SingleOrNone<T>(this IEnumerable<T> enumerable) =>
@@ -31,16 +33,18 @@ public static partial class MaybeExtensions
 
     public static Maybe<T> SingleOrNone<T>(this IEnumerable<T> enumerable, Func<T, bool> predicate)
     {
-        if (!enumerable.Any(predicate)) return Maybe.None<T>();
+        var array = enumerable.ToArray();
 
-        return enumerable.Single(predicate);
+        return array.Any(predicate)
+            ? array.Single(predicate)
+            : Maybe.None<T>();
     }
 
     public static IEnumerable<T> AsEnumerable<T>(this Maybe<T> maybe)
     {
         return maybe
-            .Map(x => GetEnumerable(x))
-            .Reduce(() => Enumerable.Empty<T>());
+            .Map(GetEnumerable)
+            .Reduce(Enumerable.Empty<T>);
 
         IEnumerable<T> GetEnumerable(T value)
         {
