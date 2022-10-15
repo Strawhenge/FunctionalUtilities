@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using System;
+using Xunit;
 
 namespace FunctionalUtilities.Tests.UnitTests.MaybeExtensions
 {
@@ -7,7 +8,7 @@ namespace FunctionalUtilities.Tests.UnitTests.MaybeExtensions
         [Fact]
         public void FirstOrNone_GivenSequenceIsEmpty_ShouldReturnNone()
         {
-            var subject = new int[0];
+            var subject = Array.Empty<int>();
 
             var result = subject.FirstOrNone();
             var result2 = subject.FirstOrNone(x => true);
@@ -21,7 +22,7 @@ namespace FunctionalUtilities.Tests.UnitTests.MaybeExtensions
         [Fact]
         public void FirstOrNone_GivenSequenceNotEmpty_ShouldReturnSome()
         {
-            var subject = new int[] { 10, 1, 2 };
+            var subject = new[] { 10, 1, 2 };
 
             var result = subject.FirstOrNone();
 
@@ -32,7 +33,7 @@ namespace FunctionalUtilities.Tests.UnitTests.MaybeExtensions
         [Fact]
         public void FirstOrNone_GivenSequenceNotEmpty_AndPredicateMatches_ShouldReturnSome()
         {
-            var subject = new int[] { 10, 1, 2 };
+            var subject = new[] { 10, 1, 2 };
 
             var result = subject.FirstOrNone(x => x == 1);
 
@@ -43,7 +44,7 @@ namespace FunctionalUtilities.Tests.UnitTests.MaybeExtensions
         [Fact]
         public void FirstOrNone_GivenSequenceNotEmpty_AndPredicateDoesNotMatche_ShouldReturnNone()
         {
-            var subject = new int[] { 10, 1, 2 };
+            var subject = new[] { 10, 1, 2 };
 
             var result = subject.FirstOrNone(x => false);
 

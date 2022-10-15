@@ -23,7 +23,7 @@ namespace FunctionalUtilities.Tests.UnitTests.MaybeExtensions
         [InlineData(-19)]
         public void ElementAtOrNone_GivenIndexIsNotInRange_ShouldReturnNone(int index)
         {
-            var subject = new string[] { "first", "second", "third" };
+            var subject = new[] { "first", "second", "third" };
 
             var result = subject.ElementAtOrNone(index);
 
@@ -36,7 +36,7 @@ namespace FunctionalUtilities.Tests.UnitTests.MaybeExtensions
         [InlineData(2, "third")]
         public void ElementAtOrNone_GivenIndexIsInRange_ShouldReturnMaybeWithCorrectValue(int index, string expectedResult)
         {
-            var subject = new string[] { "first", "second", "third" };
+            var subject = new[] { "first", "second", "third" };
 
             var result = subject.ElementAtOrNone(index);
 

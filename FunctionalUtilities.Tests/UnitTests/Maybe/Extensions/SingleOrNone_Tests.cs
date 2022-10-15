@@ -22,7 +22,7 @@ namespace FunctionalUtilities.Tests.UnitTests.MaybeExtensions
         [Fact]
         public void SingleOrNone_GivenSequenceHasOneItem_ShouldReturnSome()
         {
-            var subject = new int[] { 10 };
+            var subject = new[] { 10 };
 
             var result = subject.SingleOrNone();
 
@@ -33,7 +33,7 @@ namespace FunctionalUtilities.Tests.UnitTests.MaybeExtensions
         [Fact]
         public void SingleOrNone_GivenSequenceHasMoreThanOneElement_ShouldThrow()
         {
-            var subject = new int[] { 1, 0 };
+            var subject = new[] { 1, 0 };
 
             Assert.Throws<InvalidOperationException>(
                 () => subject.SingleOrNone());
@@ -42,7 +42,7 @@ namespace FunctionalUtilities.Tests.UnitTests.MaybeExtensions
         [Fact]
         public void SingleOrNone_GivenSequenceHasMoreThanOneElement_AndPredicateDoesNotMatch_ShouldReturnNone()
         {
-            var subject = new int[] { 1, 0 };
+            var subject = new[] { 1, 0 };
 
             var result = subject.SingleOrNone(x => false);
 
@@ -52,7 +52,7 @@ namespace FunctionalUtilities.Tests.UnitTests.MaybeExtensions
         [Fact]
         public void SingleOrNone_GivenPredicateMatchesOneElement_ShouldReturnSome()
         {
-            var subject = new int[] { 1, 6, 3 };
+            var subject = new[] { 1, 6, 3 };
 
             var result = subject.SingleOrNone(x => x == 6);
 
@@ -63,7 +63,7 @@ namespace FunctionalUtilities.Tests.UnitTests.MaybeExtensions
         [Fact]
         public void SingleOrNone_GivenPredicateMatchesMoreThanOneElement_ShouldThrow()
         {
-            var subject = new int[] { 1, 1, 0 };
+            var subject = new[] { 1, 1, 0 };
 
             Assert.Throws<InvalidOperationException>(
                 () => subject.SingleOrNone(x => x == 1));

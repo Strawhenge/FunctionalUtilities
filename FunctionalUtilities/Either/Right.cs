@@ -2,9 +2,9 @@
 
 namespace FunctionalUtilities
 {
-    internal sealed class Right<TLeft, TRight> : Either<TLeft, TRight>
+    sealed class Right<TLeft, TRight> : Either<TLeft, TRight>
     {
-        private readonly TRight value;
+        readonly TRight value;
 
         public Right(TRight value)
         {

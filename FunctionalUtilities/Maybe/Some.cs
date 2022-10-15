@@ -2,9 +2,9 @@
 
 namespace FunctionalUtilities
 {
-    internal sealed class Some<T> : Maybe<T>
+    sealed class Some<T> : Maybe<T>
     {
-        private readonly T value;
+        readonly T value;
 
         public Some(T value)
         {

@@ -2,31 +2,31 @@
 
 namespace FunctionalUtilities
 {
-    internal sealed class Left<TLeft, TRight> : Either<TLeft, TRight>
+    sealed class Left<TLeft, TRight> : Either<TLeft, TRight>
     {
-        private readonly TLeft value;
+        readonly TLeft _value;
 
         public Left(TLeft value)
         {
             if (value == null) throw new ArgumentNullException(nameof(value));
 
-            this.value = value;
+            _value = value;
         }
 
-        public override void DoLeft(Action<TLeft> action) => action(value);
+        public override void DoLeft(Action<TLeft> action) => action(_value);
 
         public override void DoRight(Action<TRight> action)
         {
         }
 
         public override Either<TNewLeft, TRight> MapLeft<TNewLeft>(Func<TLeft, TNewLeft> mapping) =>
-            new Left<TNewLeft, TRight>(mapping(value));
+            new Left<TNewLeft, TRight>(mapping(_value));
 
         public override Either<TLeft, TNewRight> MapRight<TNewRight>(Func<TRight, TNewRight> mapping) =>
-            new Left<TLeft, TNewRight>(value);
+            new Left<TLeft, TNewRight>(_value);
 
-        public override TLeft ReduceLeft(Func<TRight, TLeft> mapping) => value;
+        public override TLeft ReduceLeft(Func<TRight, TLeft> mapping) => _value;
 
-        public override TRight ReduceRight(Func<TLeft, TRight> mapping) => mapping(value);
+        public override TRight ReduceRight(Func<TLeft, TRight> mapping) => mapping(_value);
     }
 }
