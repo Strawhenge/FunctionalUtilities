@@ -22,7 +22,7 @@ jobs:
         run: dotnet test
 
       - name: Pack
-        run: dotnet pack -c Release -p:PackageVersion=1.0.${{ github.run_number }} -o nupkg
+        run: dotnet pack -c Release -p:PackageVersion=1.1.${{ github.run_number }} -o nupkg
 
       - name: Publish
         run: dotnet nuget push *.nupkg -k ${{ secrets.GITHUB_TOKEN }} -s https://nuget.pkg.github.com/Strawhenge/index.json --no-symbols true
