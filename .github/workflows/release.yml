@@ -1,0 +1,29 @@
+name: .NET Core
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.1.101
+
+      - name: Build
+        run: dotnet build -p:Version=1.1.${{ github.run_number }} --configuration Release
+
+      - name: Test
+        run: dotnet test
+
+      - name: Pack
+        run: dotnet pack -c Release -p:PackageVersion=1.1.${{ github.run_number }} -o nupkg
+
+      - name: Publish
+        run: dotnet nuget push *.nupkg -k ${{ secrets.GITHUB_TOKEN }} -s https://nuget.pkg.github.com/Strawhenge/index.json --no-symbols true
+        working-directory: ./nupkg
