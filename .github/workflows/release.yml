@@ -3,6 +3,9 @@ name: Release
 on:
   workflow_dispatch:
 
+env:
+  VERSION: 1.1.${{ github.run_number }}
+  
 jobs:
   deploy:
     runs-on: windows-latest
@@ -16,14 +19,34 @@ jobs:
           dotnet-version: 3.1.101
 
       - name: Build
-        run: dotnet build -p:Version=1.1.${{ github.run_number }} --configuration Release
+        run: dotnet build -p:Version=${{ env.VERSION }} --configuration Release
 
       - name: Test
         run: dotnet test
 
-      - name: Pack
-        run: dotnet pack -c Release -p:PackageVersion=1.1.${{ github.run_number }} -o nupkg
+      - name: Pack Nuget Package
+        run: dotnet pack -c Release -p:PackageVersion=${{ env.VERSION }} -o nupkg
 
-      - name: Publish
+      - name: Publish Nuget Package
         run: dotnet nuget push *.nupkg -k ${{ secrets.GITHUB_TOKEN }} -s https://nuget.pkg.github.com/Strawhenge/index.json --no-symbols true
         working-directory: ./nupkg
+        
+      - name: Release Unity Package
+        run: |
+          git --version
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+          git checkout -b ${{ env.TEMP_BRANCH }}
+          echo "`jq '.version="${{ env.VERSION }}"' 'Package\package.json'`" > 'Package\package.json'
+          Copy-Item "FunctionalUtilities\bin\Release\netstandard2.0\FunctionalUtilities.dll" -Destination "Package\Runtime"
+          git add Package\Runtime\FunctionalUtilities.dll -f
+          git commit -m 'Prepare Release ${{ env.VERSION }}'
+          git push --set-upstream origin ${{ env.TEMP_BRANCH }}
+          git push --delete origin release
+          git checkout -b release
+          git push --set-upstream origin release
+          git push --delete origin ${{ env.TEMP_BRANCH }}
+        env:
+          TEMP_BRANCH: temp-${{ github.run_number }}
+          
+          
