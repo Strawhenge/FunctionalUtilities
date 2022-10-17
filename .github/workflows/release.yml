@@ -36,12 +36,18 @@ jobs:
           git --version
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
-          git checkout -b ${{ env.TEMP_BRANCH }}
-          echo "`jq '.version="${{ env.VERSION }}"' 'Package\package.json'`" > 'Package\package.json'
+          git checkout -b ${{ env.TEMP_BRANCH }}          
+          
           Copy-Item "FunctionalUtilities\bin\Release\netstandard2.0\FunctionalUtilities.dll" -Destination "Package\Runtime"
+          
+          $package = Get-Content 'Package\package.json' -raw | ConvertFrom-Json
+          $package.version = '${{ env.VERSION }}'
+          $package | ConvertTo-Json | set-content 'Package\package.json'
+          
           git add Package\Runtime\FunctionalUtilities.dll -f
           git commit -m 'Prepare Release ${{ env.VERSION }}'
           git push --set-upstream origin ${{ env.TEMP_BRANCH }}
+          
           git push --delete origin release
           git checkout -b release
           git push --set-upstream origin release
