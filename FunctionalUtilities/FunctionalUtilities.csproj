@@ -9,4 +9,8 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Condition="'$(SolutionDir)' != '*Undefined*'" Command="xcopy /Y &quot;$(TargetPath)&quot; &quot;$(SolutionDir)\Package\Runtime&quot;" />
+  </Target>
+
 </Project>
