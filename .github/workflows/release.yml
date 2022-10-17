@@ -45,6 +45,7 @@ jobs:
           $package | ConvertTo-Json | set-content 'Package\package.json'
           
           git add Package\Runtime\FunctionalUtilities.dll -f
+          git add Package\package.json
           git commit -m 'Prepare Release ${{ env.VERSION }}'
           git push --set-upstream origin ${{ env.TEMP_BRANCH }}
           
