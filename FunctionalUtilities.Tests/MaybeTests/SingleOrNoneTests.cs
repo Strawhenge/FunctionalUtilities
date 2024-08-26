@@ -27,7 +27,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
             var result = subject.SingleOrNone();
 
             AssertMaybe.IsSome(result);
-            Assert.Equal(10, result.ReduceUnsafe());
+            Assert.Equal(10, (int)result);
         }
 
         [Fact]
@@ -57,7 +57,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
             var result = subject.SingleOrNone(x => x == 6);
 
             AssertMaybe.IsSome(result);
-            Assert.Equal(6, result.ReduceUnsafe());
+            Assert.Equal(6, (int)result);
         }
 
         [Fact]

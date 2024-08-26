@@ -43,7 +43,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
 
             AssertMaybe.IsSome(result);
 
-            var reducedResult = result.ReduceUnsafe();
+            var reducedResult = (string)result;
             Assert.Equal(expectedResult, reducedResult);
         }
     }

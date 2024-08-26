@@ -24,7 +24,4 @@ public static partial class MaybeExtensions
 
         return maybe.HasValue();
     }
-
-    public static T ReduceUnsafe<T>(this Maybe<T> maybe) => maybe.Reduce(
-        () => throw new InvalidOperationException($"Cannot reduce value from {maybe.GetType().Name}"));
 }
