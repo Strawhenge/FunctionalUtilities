@@ -1,13 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-    
-    <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
-        <LangVersion>9</LangVersion>
-        <Nullable>enable</Nullable>
-        <WarningsAsErrors>Nullable</WarningsAsErrors>
-    </PropertyGroup>
 
     <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
         <Authors>Matt Bristow</Authors>
         <Company>Strawhenge</Company>
         <Description>Monads (Maybe, Either)</Description>

@@ -13,7 +13,7 @@ namespace FunctionalUtilities
 
         public abstract bool HasSome();
         
-        public abstract bool HasSome(out T? value);
+        public abstract bool HasSome(out T value);
         
         public abstract T Reduce(Func<T> reducer);
 
