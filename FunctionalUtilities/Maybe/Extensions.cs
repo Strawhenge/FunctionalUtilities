@@ -1,5 +1,4 @@
 ﻿using FunctionalUtilities;
-using System;
 
 public static partial class MaybeExtensions
 {

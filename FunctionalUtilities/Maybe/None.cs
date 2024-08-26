@@ -4,6 +4,12 @@ namespace FunctionalUtilities
 {
     sealed class None<T> : Maybe<T>
     {
+        internal static None<T> Instance { get; } = new None<T>();
+        
+        None()
+        {
+        }
+
         public override void Do(Action<T> action)
         {
         }

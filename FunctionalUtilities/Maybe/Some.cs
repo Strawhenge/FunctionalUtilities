@@ -6,7 +6,7 @@ namespace FunctionalUtilities
     {
         readonly T _value;
 
-        public Some(T value)
+        internal Some(T value)
         {
             if (value == null) throw new ArgumentNullException(nameof(value));
 
