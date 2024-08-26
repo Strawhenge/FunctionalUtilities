@@ -1,8 +1,9 @@
-﻿using Xunit;
+﻿using System;
+using Xunit;
 
-namespace FunctionalUtilities.Tests.UnitTests.MaybeExtensions
+namespace FunctionalUtilities.Tests.MaybeTests
 {
-    public class ElementAtOrNone_Tests
+    public class ElementAtOrNoneTests
     {
         [Theory]
         [InlineData(0)]
@@ -10,7 +11,7 @@ namespace FunctionalUtilities.Tests.UnitTests.MaybeExtensions
         [InlineData(-100)]
         public void ElementAtOrNone_GivenEnumerableIsEmpty_ShouldReturnNone(int index)
         {
-            var subject = new int[0];
+            var subject = Array.Empty<int>();
 
             var result = subject.ElementAtOrNone(index);
             AssertMaybe.IsNone(result);

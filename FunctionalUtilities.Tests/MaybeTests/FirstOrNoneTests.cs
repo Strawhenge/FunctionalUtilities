@@ -1,9 +1,9 @@
 ﻿using System;
 using Xunit;
 
-namespace FunctionalUtilities.Tests.UnitTests.MaybeExtensions
+namespace FunctionalUtilities.Tests.MaybeTests
 {
-    public class FirstOrNone_Tests
+    public class FirstOrNoneTests
     {
         [Fact]
         public void FirstOrNone_GivenSequenceIsEmpty_ShouldReturnNone()

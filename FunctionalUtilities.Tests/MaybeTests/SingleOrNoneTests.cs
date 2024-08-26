@@ -1,14 +1,14 @@
 ﻿using System;
 using Xunit;
 
-namespace FunctionalUtilities.Tests.UnitTests.MaybeExtensions
+namespace FunctionalUtilities.Tests.MaybeTests
 {
-    public class SingleOrNone_Tests
+    public class SingleOrNoneTests
     {
         [Fact]
         public void SingleOrNone_GivenSequenceIsEmpty_ShouldReturnNone()
         {
-            var subject = new int[0];
+            var subject = Array.Empty<int>();
 
             var result = subject.SingleOrNone();
             var result2 = subject.SingleOrNone(x => true);

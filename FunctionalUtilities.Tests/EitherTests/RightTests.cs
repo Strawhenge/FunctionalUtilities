@@ -1,9 +1,9 @@
 ﻿using System;
 using Xunit;
 
-namespace FunctionalUtilities.Tests.UnitTests
+namespace FunctionalUtilities.Tests.EitherTests
 {
-    public class Right_Tests
+    public class RightTests
     {
         [Fact]
         public void ReduceRight_ShouldReturnExpectedString()

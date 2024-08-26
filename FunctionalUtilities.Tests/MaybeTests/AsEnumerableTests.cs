@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using Xunit;
 
-namespace FunctionalUtilities.Tests.UnitTests.MaybeExtensions
+namespace FunctionalUtilities.Tests.MaybeTests
 {
-    public class AsEnumerable_Tests
+    public class AsEnumerableTests
     {
         [Fact]
         public void AsEnumerable_GivenNone_ShouldReturnEmptyEnumerable()
