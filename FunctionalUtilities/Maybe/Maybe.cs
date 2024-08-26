@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace FunctionalUtilities
 {
@@ -8,6 +9,14 @@ namespace FunctionalUtilities
 
         public abstract Maybe<TNew> Map<TNew>(Func<T, TNew> mapping);
 
+        public abstract Maybe<T> Where(Func<T, bool> predicate);
+
+        public abstract bool HasSome();
+        
+        public abstract bool HasSome(out T? value);
+        
         public abstract T Reduce(Func<T> reducer);
+
+        public abstract IEnumerable<T> AsEnumerable();
     }
 }

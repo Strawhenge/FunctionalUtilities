@@ -1,18 +1,18 @@
 ﻿using System;
 using Xunit;
 
-namespace FunctionalUtilities.Tests.UnitTests.MaybeExtensions
+namespace FunctionalUtilities.Tests.MaybeTests
 {
-    public class SingleOrNone_Tests
+    public class SingleOrNoneTests
     {
         [Fact]
         public void SingleOrNone_GivenSequenceIsEmpty_ShouldReturnNone()
         {
-            var subject = new int[0];
+            var subject = Array.Empty<int>();
 
             var result = subject.SingleOrNone();
-            var result2 = subject.SingleOrNone(x => true);
-            var result3 = subject.SingleOrNone(x => false);
+            var result2 = subject.SingleOrNone(_ => true);
+            var result3 = subject.SingleOrNone(_ => false);
 
             AssertMaybe.IsNone(result);
             AssertMaybe.IsNone(result2);
@@ -27,7 +27,7 @@ namespace FunctionalUtilities.Tests.UnitTests.MaybeExtensions
             var result = subject.SingleOrNone();
 
             AssertMaybe.IsSome(result);
-            Assert.Equal(10, result.ReduceUnsafe());
+            Assert.Equal(10, (int)result);
         }
 
         [Fact]
@@ -44,7 +44,7 @@ namespace FunctionalUtilities.Tests.UnitTests.MaybeExtensions
         {
             var subject = new[] { 1, 0 };
 
-            var result = subject.SingleOrNone(x => false);
+            var result = subject.SingleOrNone(_ => false);
 
             AssertMaybe.IsNone(result);
         }
@@ -57,7 +57,7 @@ namespace FunctionalUtilities.Tests.UnitTests.MaybeExtensions
             var result = subject.SingleOrNone(x => x == 6);
 
             AssertMaybe.IsSome(result);
-            Assert.Equal(6, result.ReduceUnsafe());
+            Assert.Equal(6, (int)result);
         }
 
         [Fact]

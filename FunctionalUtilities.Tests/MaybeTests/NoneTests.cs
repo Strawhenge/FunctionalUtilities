@@ -1,9 +1,9 @@
 ﻿using System;
 using Xunit;
 
-namespace FunctionalUtilities.Tests.UnitTests
+namespace FunctionalUtilities.Tests.MaybeTests
 {
-    public class None_Tests
+    public class NoneTests
     {
         [Fact]
         public void Reduce_ShouldReturnReducerResult()

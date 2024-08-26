@@ -1,30 +1,30 @@
-﻿using FunctionalUtilities;
-using System;
+﻿using System;
 
-public static partial class MaybeExtensions
+namespace FunctionalUtilities
 {
-    public static T? ToNullable<T>(this Maybe<T> maybe) where T : struct => maybe
-        .Map<T?>(x => x)
-        .Reduce(() => null);
-
-    public static Maybe<T> ToMaybe<T>(this T? obj) where T : struct => obj.HasValue
-        ? Maybe.Some(obj.Value)
-        : Maybe.None<T>();
-
-    public static Maybe<T> Flatten<T>(this Maybe<Maybe<T>> maybe) => maybe.Reduce(() => Maybe.None<T>());
-
-    public static bool HasValue<T>(this Maybe<T> maybe) => maybe
-        .Map(_ => true)
-        .Reduce(() => false);
-
-    public static bool HasSome<T>(this Maybe<T> maybe, out T some)
+    public static partial class MaybeExtensions
     {
-        some = maybe
-            .Reduce(() => default);
+        public static T? ToNullable<T>(this Maybe<T> maybe) where T : struct
+        {
+            if (maybe == null)
+                throw new ArgumentNullException(nameof(maybe));
 
-        return maybe.HasValue();
+            return maybe
+                .Map<T?>(x => x)
+                .Reduce(() => null);
+        }
+
+        public static Maybe<T> ToMaybe<T>(this T? obj) where T : struct =>
+            obj.HasValue
+                ? Maybe.Some(obj.Value)
+                : Maybe.None<T>();
+
+        public static Maybe<T> Flatten<T>(this Maybe<Maybe<T>> maybe)
+        {
+            if (maybe == null)
+                throw new ArgumentNullException(nameof(maybe));
+
+            return maybe.Reduce(Maybe.None<T>);
+        }
     }
-
-    public static T ReduceUnsafe<T>(this Maybe<T> maybe) => maybe.Reduce(
-        () => throw new InvalidOperationException($"Cannot reduce value from {maybe.GetType().Name}"));
 }
