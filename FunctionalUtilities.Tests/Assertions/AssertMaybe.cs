@@ -13,7 +13,7 @@ namespace FunctionalUtilities.Tests
         public static void IsNone<T>(Maybe<T> maybe)
         {
             Assert.NotNull(maybe);
-            maybe.Do(x => throw new IsSomeException(x));
+            maybe.Do(x => throw new IsSomeException(x!));
         }
     }
 }

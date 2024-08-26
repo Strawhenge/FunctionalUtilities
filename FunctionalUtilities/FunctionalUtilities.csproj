@@ -1,16 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+    
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <LangVersion>9</LangVersion>
+        <Nullable>enable</Nullable>
+        <WarningsAsErrors>Nullable</WarningsAsErrors>
+    </PropertyGroup>
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <Authors>Matt Bristow</Authors>
-    <Company>Strawhenge</Company>
-    <Description>Monads (Maybe, Either)</Description>
-    <RepositoryUrl>https://github.com/Strawhenge/FunctionalUtilities.git</RepositoryUrl>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-  </PropertyGroup>
+    <PropertyGroup>
+        <Authors>Matt Bristow</Authors>
+        <Company>Strawhenge</Company>
+        <Description>Monads (Maybe, Either)</Description>
+        <RepositoryUrl>https://github.com/Strawhenge/FunctionalUtilities.git</RepositoryUrl>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    </PropertyGroup>
 
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Condition="'$(SolutionDir)' != '*Undefined*'" Command="xcopy /Y &quot;$(TargetPath)&quot; &quot;$(SolutionDir)\Package\Runtime&quot;" />
-  </Target>
+    <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+        <Exec Condition="'$(SolutionDir)' != '*Undefined*'" Command="xcopy /Y &quot;$(TargetPath)&quot; &quot;$(SolutionDir)\Package\Runtime&quot;"/>
+    </Target>
 
 </Project>

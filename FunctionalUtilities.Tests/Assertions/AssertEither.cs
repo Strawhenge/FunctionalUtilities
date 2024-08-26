@@ -9,7 +9,7 @@ namespace FunctionalUtilities.Tests
             Assert.NotNull(either);
 
             either.ReduceLeft(
-                reducer: x => throw new IsRightException(x));
+                reducer: x => throw new IsRightException(x!));
         }
 
         public static void Right<TLeft, TRight>(Either<TLeft, TRight> either)
@@ -17,7 +17,7 @@ namespace FunctionalUtilities.Tests
             Assert.NotNull(either);
 
             either.ReduceRight(
-                reducer: x => throw new IsLeftException(x));
+                reducer: x => throw new IsLeftException(x!));
         }
     }
 }

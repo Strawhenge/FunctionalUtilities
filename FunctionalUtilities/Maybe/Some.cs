@@ -20,7 +20,7 @@ namespace FunctionalUtilities
 
         public override bool HasSome() => true;
 
-        public override bool HasSome(out T value)
+        public override bool HasSome(out T? value)
         {
             value = _value;
             return true;

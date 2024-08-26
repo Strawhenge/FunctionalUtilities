@@ -6,7 +6,7 @@ namespace FunctionalUtilities
 {
     sealed class None<T> : Maybe<T>
     {
-        internal static None<T> Instance { get; } = new None<T>();
+        internal static None<T> Instance { get; } = new();
 
         None()
         {
@@ -20,7 +20,7 @@ namespace FunctionalUtilities
 
         public override bool HasSome() => false;
 
-        public override bool HasSome(out T value)
+        public override bool HasSome(out T? value)
         {
             value = default;
             return false;
