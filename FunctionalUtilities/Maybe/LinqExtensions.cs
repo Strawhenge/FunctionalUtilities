@@ -7,6 +7,9 @@ public static partial class MaybeExtensions
 {
     public static Maybe<T> ElementAtOrNone<T>(this IEnumerable<T> enumerable, int index)
     {
+        if (enumerable == null) 
+            throw new ArgumentNullException(nameof(enumerable));
+        
         if (index < 0) return Maybe.None<T>();
 
         var array = enumerable.ToArray();
@@ -17,10 +20,13 @@ public static partial class MaybeExtensions
     }
 
     public static Maybe<T> FirstOrNone<T>(this IEnumerable<T> enumerable) =>
-        enumerable.FirstOrNone(x => true);
+        enumerable.FirstOrNone(_ => true);
 
     public static Maybe<T> FirstOrNone<T>(this IEnumerable<T> enumerable, Func<T, bool> predicate)
     {
+        if (enumerable == null) 
+            throw new ArgumentNullException(nameof(enumerable));
+        
         var array = enumerable.ToArray();
 
         return array.Any(predicate)
@@ -29,10 +35,13 @@ public static partial class MaybeExtensions
     }
 
     public static Maybe<T> SingleOrNone<T>(this IEnumerable<T> enumerable) =>
-        enumerable.SingleOrNone(x => true);
+        enumerable.SingleOrNone(_ => true);
 
     public static Maybe<T> SingleOrNone<T>(this IEnumerable<T> enumerable, Func<T, bool> predicate)
     {
+        if (enumerable == null) 
+            throw new ArgumentNullException(nameof(enumerable));
+        
         var array = enumerable.ToArray();
 
         return array.Any(predicate)
