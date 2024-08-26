@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace FunctionalUtilities
 {
@@ -17,6 +18,19 @@ namespace FunctionalUtilities
 
         public override Maybe<TNew> Map<TNew>(Func<T, TNew> mapping) => new Some<TNew>(mapping(_value));
 
+        public override bool HasSome() => true;
+
+        public override bool HasSome(out T value)
+        {
+            value = _value;
+            return true;
+        }
+
         public override T Reduce(Func<T> fallback) => _value;
+
+        public override IEnumerable<T> AsEnumerable()
+        {
+            yield return _value;
+        }
     }
 }

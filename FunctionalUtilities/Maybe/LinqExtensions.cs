@@ -39,16 +39,4 @@ public static partial class MaybeExtensions
             ? array.Single(predicate)
             : Maybe.None<T>();
     }
-
-    public static IEnumerable<T> AsEnumerable<T>(this Maybe<T> maybe)
-    {
-        return maybe
-            .Map(GetEnumerable)
-            .Reduce(Enumerable.Empty<T>);
-
-        IEnumerable<T> GetEnumerable(T value)
-        {
-            yield return value;
-        }
-    }
 }

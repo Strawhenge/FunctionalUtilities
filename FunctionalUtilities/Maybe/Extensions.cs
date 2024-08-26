@@ -10,17 +10,5 @@ public static partial class MaybeExtensions
         ? Maybe.Some(obj.Value)
         : Maybe.None<T>();
 
-    public static Maybe<T> Flatten<T>(this Maybe<Maybe<T>> maybe) => maybe.Reduce(() => Maybe.None<T>());
-
-    public static bool HasValue<T>(this Maybe<T> maybe) => maybe
-        .Map(_ => true)
-        .Reduce(() => false);
-
-    public static bool HasSome<T>(this Maybe<T> maybe, out T some)
-    {
-        some = maybe
-            .Reduce(() => default);
-
-        return maybe.HasValue();
-    }
+    public static Maybe<T> Flatten<T>(this Maybe<Maybe<T>> maybe) => maybe.Reduce(Maybe.None<T>);
 }
