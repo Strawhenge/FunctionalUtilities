@@ -9,7 +9,8 @@ namespace FunctionalUtilities
 
         internal Some(T value)
         {
-            if (value == null) throw new ArgumentNullException(nameof(value));
+            if (value == null) 
+                throw new ArgumentNullException(nameof(value));
 
             _value = value;
         }
@@ -17,6 +18,9 @@ namespace FunctionalUtilities
         public override void Do(Action<T> action) => action(_value);
 
         public override Maybe<TNew> Map<TNew>(Func<T, TNew> mapping) => new Some<TNew>(mapping(_value));
+
+        public override Maybe<T> Where(Func<T, bool> predicate) => 
+            predicate(_value) ? this : Maybe.None<T>();
 
         public override bool HasSome() => true;
 

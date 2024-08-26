@@ -18,6 +18,8 @@ namespace FunctionalUtilities
 
         public override Maybe<TNew> Map<TNew>(Func<T, TNew> mapping) => new None<TNew>();
 
+        public override Maybe<T> Where(Func<T, bool> predicate) => this;
+
         public override bool HasSome() => false;
 
         public override bool HasSome(out T? value)

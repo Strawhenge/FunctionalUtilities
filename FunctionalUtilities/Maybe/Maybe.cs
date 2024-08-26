@@ -9,6 +9,8 @@ namespace FunctionalUtilities
 
         public abstract Maybe<TNew> Map<TNew>(Func<T, TNew> mapping);
 
+        public abstract Maybe<T> Where(Func<T, bool> predicate);
+
         public abstract bool HasSome();
         
         public abstract bool HasSome(out T? value);
