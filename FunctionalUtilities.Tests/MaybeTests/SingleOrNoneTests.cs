@@ -11,8 +11,8 @@ namespace FunctionalUtilities.Tests.MaybeTests
             var subject = Array.Empty<int>();
 
             var result = subject.SingleOrNone();
-            var result2 = subject.SingleOrNone(x => true);
-            var result3 = subject.SingleOrNone(x => false);
+            var result2 = subject.SingleOrNone(_ => true);
+            var result3 = subject.SingleOrNone(_ => false);
 
             AssertMaybe.IsNone(result);
             AssertMaybe.IsNone(result2);
@@ -44,7 +44,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         {
             var subject = new[] { 1, 0 };
 
-            var result = subject.SingleOrNone(x => false);
+            var result = subject.SingleOrNone(_ => false);
 
             AssertMaybe.IsNone(result);
         }

@@ -1,13 +1,15 @@
 ﻿using System;
-using FunctionalUtilities;
 
-public static class EitherExtensions
+namespace FunctionalUtilities
 {
-    public static T Reduce<T>(this Either<T, T> either)
+    public static class EitherExtensions
     {
-        if (either == null)
-            throw new ArgumentNullException(nameof(either));
+        public static T Reduce<T>(this Either<T, T> either)
+        {
+            if (either == null)
+                throw new ArgumentNullException(nameof(either));
 
-        return either.ReduceLeft(x => x);
+            return either.ReduceLeft(x => x);
+        }
     }
 }
