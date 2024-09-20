@@ -12,9 +12,7 @@ namespace FunctionalUtilities
         {
         }
 
-        public override void Do(Action<T> action)
-        {
-        }
+        public override Maybe<T> Do(Action<T> action) => this;
 
         public override Maybe<TNew> Map<TNew>(Func<T, TNew> mapping) => new None<TNew>();
 
@@ -29,7 +27,7 @@ namespace FunctionalUtilities
         }
 
         public override T Reduce(Func<T> fallback) => fallback();
-        
+
         public override IEnumerable<T> AsEnumerable() => Enumerable.Empty<T>();
     }
 }

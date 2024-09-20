@@ -13,11 +13,13 @@ namespace FunctionalUtilities
             _value = value;
         }
 
-        public override void DoLeft(Action<TLeft> action)
-        {
-        }
+        public override Either<TLeft, TRight> DoLeft(Action<TLeft> action) => this;
 
-        public override void DoRight(Action<TRight> action) => action(_value);
+        public override Either<TLeft, TRight> DoRight(Action<TRight> action)
+        {
+            action(_value);
+            return this;
+        }
 
         public override Either<TNewLeft, TRight> MapLeft<TNewLeft>(Func<TLeft, TNewLeft> mapping) =>
             new Right<TNewLeft, TRight>(_value);

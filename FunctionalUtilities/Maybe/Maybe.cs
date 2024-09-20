@@ -5,7 +5,7 @@ namespace FunctionalUtilities
 {
     public abstract partial class Maybe<T>
     {
-        public abstract void Do(Action<T> action);
+        public abstract Maybe<T> Do(Action<T> action);
 
         public abstract Maybe<TNew> Map<TNew>(Func<T, TNew> mapping);
 
