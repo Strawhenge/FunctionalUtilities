@@ -13,7 +13,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
             var subject = Maybe.Some(expected);
 
             var actual = subject.Reduce(
-                reducer: () => throw new Exception("Unexpected call to reducer"));
+                fallback: () => throw new Exception("Unexpected call to reducer"));
 
             Assert.NotNull(actual);
             Assert.Equal(expected, actual);
@@ -40,7 +40,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
 
             var actual = subject
                 .Map(_ => expected)
-                .Reduce(reducer: () => throw new Exception("Unexpected call to reducer"));
+                .Reduce(fallback: () => throw new Exception("Unexpected call to reducer"));
 
             Assert.NotNull(actual);
             Assert.Equal(expected, actual);

@@ -18,6 +18,8 @@ namespace FunctionalUtilities
 
         public override Maybe<T> Where(Func<T, bool> predicate) => this;
 
+        public override Maybe<T> Combine(Func<Maybe<T>> combineWith) => combineWith();
+
         public override bool HasSome() => false;
 
         public override bool HasSome(out T value)
