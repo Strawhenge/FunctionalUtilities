@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace FunctionalUtilities
 {
@@ -25,6 +26,16 @@ namespace FunctionalUtilities
                 throw new ArgumentNullException(nameof(maybe));
 
             return maybe.Reduce(Maybe.None<T>);
+        }
+
+        public static Maybe<TValue> MaybeGetValue<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key)
+        {
+            if (dictionary == null)
+                throw new ArgumentNullException(nameof(dictionary));
+
+            return dictionary.TryGetValue(key, out var value)
+                ? Maybe.Some(value)
+                : Maybe.None<TValue>();
         }
     }
 }
