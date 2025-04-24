@@ -17,7 +17,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         }
 
         [Fact]
-        public void AsEnumerable_GivenSoMe_ShouldReturnEnumerableWithSingleItem()
+        public void AsEnumerable_GivenSome_ShouldReturnEnumerableWithSingleItem()
         {
             var item = new object();
             var subject = Maybe.Some(item);
