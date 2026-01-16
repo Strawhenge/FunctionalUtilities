@@ -16,6 +16,8 @@ namespace FunctionalUtilities
         public abstract bool HasSome();
         
         public abstract bool HasSome(out T value);
+
+        public abstract bool WhereHas(Func<T, bool> predicate);
         
         public abstract T Reduce(Func<T> fallback);
 

@@ -36,6 +36,8 @@ namespace FunctionalUtilities
             return true;
         }
 
+        public override bool WhereHas(Func<T, bool> predicate) => predicate(_value);
+
         public override T Reduce(Func<T> fallback) => _value;
 
         public override IEnumerable<T> AsEnumerable()
