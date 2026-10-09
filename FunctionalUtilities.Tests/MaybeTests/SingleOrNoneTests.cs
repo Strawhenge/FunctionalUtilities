@@ -90,5 +90,32 @@ namespace FunctionalUtilities.Tests.MaybeTests
 
             Assert.Equal("enumerable", exception.ParamName);
         }
+
+        [Fact]
+        public void SingleOrNone_ShouldEvaluatePredicateOncePerElement()
+        {
+            var subject = new[] { 1, 2, 3 };
+            var calls = 0;
+
+            var result = subject.SingleOrNone(x =>
+            {
+                calls++;
+                return x == 2;
+            });
+
+            AssertMaybe.IsSome(result, 2);
+            Assert.Equal(3, calls);
+        }
+
+        [Fact]
+        public void SingleOrNone_GivenPredicateIsNull_ShouldThrow()
+        {
+            var subject = new[] { 1 };
+
+            var exception = Assert.Throws<ArgumentNullException>(
+                () => subject.SingleOrNone(null));
+
+            Assert.Equal("predicate", exception.ParamName);
+        }
     }
 }

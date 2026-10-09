@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace FunctionalUtilities
 {
@@ -13,11 +12,27 @@ namespace FunctionalUtilities
 
             if (index < 0) return Maybe.None<T>();
 
-            var array = enumerable.ToArray();
+            if (enumerable is IList<T> list)
+                return index < list.Count
+                    ? SomeElement(list[index], nameof(enumerable))
+                    : Maybe.None<T>();
 
-            return index >= array.Length
-                ? Maybe.None<T>()
-                : SomeElement(array[index], nameof(enumerable));
+            if (enumerable is IReadOnlyList<T> readOnlyList)
+                return index < readOnlyList.Count
+                    ? SomeElement(readOnlyList[index], nameof(enumerable))
+                    : Maybe.None<T>();
+
+            var currentIndex = 0;
+
+            foreach (var element in enumerable)
+            {
+                if (currentIndex == index)
+                    return SomeElement(element, nameof(enumerable));
+
+                currentIndex++;
+            }
+
+            return Maybe.None<T>();
         }
 
         public static Maybe<T> FirstOrNone<T>(this IEnumerable<T> enumerable) =>
@@ -28,11 +43,16 @@ namespace FunctionalUtilities
             if (enumerable == null)
                 throw new ArgumentNullException(nameof(enumerable));
 
-            var array = enumerable.ToArray();
+            if (predicate == null)
+                throw new ArgumentNullException(nameof(predicate));
 
-            return array.Any(predicate)
-                ? SomeElement(array.First(predicate), nameof(enumerable))
-                : Maybe.None<T>();
+            foreach (var element in enumerable)
+            {
+                if (predicate(element))
+                    return SomeElement(element, nameof(enumerable));
+            }
+
+            return Maybe.None<T>();
         }
 
         public static Maybe<T> SingleOrNone<T>(this IEnumerable<T> enumerable) =>
@@ -43,10 +63,26 @@ namespace FunctionalUtilities
             if (enumerable == null)
                 throw new ArgumentNullException(nameof(enumerable));
 
-            var array = enumerable.ToArray();
+            if (predicate == null)
+                throw new ArgumentNullException(nameof(predicate));
 
-            return array.Any(predicate)
-                ? SomeElement(array.Single(predicate), nameof(enumerable))
+            var found = false;
+            var match = default(T);
+
+            foreach (var element in enumerable)
+            {
+                if (!predicate(element))
+                    continue;
+
+                if (found)
+                    throw new InvalidOperationException("Sequence contains more than one matching element.");
+
+                found = true;
+                match = element;
+            }
+
+            return found
+                ? SomeElement(match, nameof(enumerable))
                 : Maybe.None<T>();
         }
 
