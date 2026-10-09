@@ -103,5 +103,6 @@ namespace FunctionalUtilities.Tests.EitherTests
 
                 Assert.Equal(paramName, exception.ParamName);
             }
+        }
     }
 }

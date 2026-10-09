@@ -91,5 +91,6 @@ namespace FunctionalUtilities.Tests.MaybeTests
 
                 Assert.Equal(paramName, exception.ParamName);
             }
+        }
     }
 }
