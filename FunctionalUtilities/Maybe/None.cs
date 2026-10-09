@@ -14,7 +14,7 @@ namespace FunctionalUtilities
 
         public override Maybe<T> Do(Action<T> action) => this;
 
-        public override Maybe<TNew> Map<TNew>(Func<T, TNew> mapping) => new None<TNew>();
+        public override Maybe<TNew> Map<TNew>(Func<T, TNew> mapping) => None<TNew>.Instance;
 
         public override Maybe<T> Where(Func<T, bool> predicate) => this;
 
