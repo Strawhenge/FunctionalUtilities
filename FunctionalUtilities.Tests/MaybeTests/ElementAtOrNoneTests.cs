@@ -46,5 +46,16 @@ namespace FunctionalUtilities.Tests.MaybeTests
             var reducedResult = (string)result;
             Assert.Equal(expectedResult, reducedResult);
         }
+
+        [Fact]
+        public void ElementAtOrNone_GivenElementAtIndexIsNull_ShouldThrow()
+        {
+            var subject = new[] { "first", null, "third" };
+
+            var exception = Assert.Throws<ArgumentNullException>(
+                () => subject.ElementAtOrNone(1));
+
+            Assert.Equal("enumerable", exception.ParamName);
+        }
     }
 }
