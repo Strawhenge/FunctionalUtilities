@@ -32,5 +32,16 @@ namespace FunctionalUtilities.Tests.MaybeTests
 
             Assert.Equal("dictionary", exception.ParamName);
         }
+
+        [Fact]
+        public void Null_dictionary_should_throw()
+        {
+            Dictionary<string, string> dictionary = null;
+
+            var exception = Assert.Throws<ArgumentNullException>(
+                () => dictionary.MaybeGetValue("key"));
+
+            Assert.Equal("dictionary", exception.ParamName);
+        }
     }
 }

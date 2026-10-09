@@ -117,5 +117,20 @@ namespace FunctionalUtilities.Tests.MaybeTests
 
             Assert.Equal("predicate", exception.ParamName);
         }
+
+        [Fact]
+        public void SingleOrNone_GivenSequenceIsNull_ShouldThrow()
+        {
+            int[] subject = null;
+
+            var exception = Assert.Throws<ArgumentNullException>(
+                () => subject.SingleOrNone());
+
+            var exception2 = Assert.Throws<ArgumentNullException>(
+                () => subject.SingleOrNone(_ => true));
+
+            Assert.Equal("enumerable", exception.ParamName);
+            Assert.Equal("enumerable", exception2.ParamName);
+        }
     }
 }

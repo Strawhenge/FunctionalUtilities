@@ -46,5 +46,21 @@ namespace FunctionalUtilities.Tests.MaybeTests
 
             AssertMaybe.IsNone(result);
         }
+
+        [Fact]
+        public void Some_should_not_invoke_the_function()
+        {
+            var hasInvoked = false;
+
+            var some = Maybe.Some(new object());
+
+            some.Combine(() =>
+            {
+                hasInvoked = true;
+                return Maybe.None<object>();
+            });
+
+            Assert.False(hasInvoked);
+        }
     }
 }
