@@ -30,7 +30,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         {
             var maybe = Maybe.None<string>();
 
-            Assert.ThrowsAny<Exception>(() =>
+            Assert.Throws<InvalidCastException>(() =>
             {
                 _ = (string)maybe;
             });

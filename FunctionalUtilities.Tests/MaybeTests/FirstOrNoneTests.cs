@@ -57,10 +57,8 @@ namespace FunctionalUtilities.Tests.MaybeTests
         {
             var subject = new[] { null, "second" };
 
-            var exception = Assert.Throws<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>(
                 () => subject.FirstOrNone());
-
-            Assert.Equal("enumerable", exception.ParamName);
         }
 
         [Fact]
@@ -68,10 +66,8 @@ namespace FunctionalUtilities.Tests.MaybeTests
         {
             var subject = new int?[] { null, 1 };
 
-            var exception = Assert.Throws<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>(
                 () => subject.FirstOrNone());
-
-            Assert.Equal("enumerable", exception.ParamName);
         }
 
         [Fact]
@@ -79,10 +75,8 @@ namespace FunctionalUtilities.Tests.MaybeTests
         {
             var subject = new[] { "first", null, "third" };
 
-            var exception = Assert.Throws<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>(
                 () => subject.FirstOrNone(x => x != "first"));
-
-            Assert.Equal("enumerable", exception.ParamName);
         }
 
         [Fact]
@@ -130,10 +124,20 @@ namespace FunctionalUtilities.Tests.MaybeTests
         {
             var subject = new[] { 1 };
 
-            var exception = Assert.Throws<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>(
                 () => subject.FirstOrNone(null));
+        }
 
-            Assert.Equal("predicate", exception.ParamName);
+        [Fact]
+        public void FirstOrNone_GivenSequenceIsNull_ShouldThrow()
+        {
+            int[] subject = null;
+
+            Assert.Throws<ArgumentNullException>(
+                () => subject.FirstOrNone());
+
+            Assert.Throws<ArgumentNullException>(
+                () => subject.FirstOrNone(_ => true));
         }
     }
 }

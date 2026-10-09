@@ -62,5 +62,27 @@ namespace FunctionalUtilities.Tests.MaybeTests
             Assert.Equal(screwdriver, strings[1]);
             Assert.Equal(saw, strings[2]);
         }
+
+        [Fact]
+        public void WhereSome_ShouldThrow_WhenSequenceIsNull()
+        {
+            Maybe<string>[] maybeStrings = null;
+
+            Assert.Throws<ArgumentNullException>(
+                () => maybeStrings.WhereSome());
+        }
+
+        [Fact]
+        public void WhereSome_ShouldThrow_WhenSequenceContainsNull()
+        {
+            var maybeStrings = new[]
+            {
+                Maybe.Some("hammer"),
+                null
+            };
+
+            Assert.Throws<ArgumentNullException>(
+                () => maybeStrings.WhereSome().ToArray());
+        }
     }
 }

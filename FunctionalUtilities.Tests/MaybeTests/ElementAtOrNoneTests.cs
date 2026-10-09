@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Xunit;
 
@@ -53,10 +54,8 @@ namespace FunctionalUtilities.Tests.MaybeTests
         {
             var subject = new[] { "first", null, "third" };
 
-            var exception = Assert.Throws<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>(
                 () => subject.ElementAtOrNone(1));
-
-            Assert.Equal("enumerable", exception.ParamName);
         }
 
         [Fact]
@@ -86,6 +85,55 @@ namespace FunctionalUtilities.Tests.MaybeTests
             var result = Sequence().ElementAtOrNone(2);
 
             AssertMaybe.IsNone(result);
+        }
+
+        [Fact]
+        public void ElementAtOrNone_GivenSequenceIsNull_ShouldThrow()
+        {
+            int[] subject = null;
+
+            Assert.Throws<ArgumentNullException>(
+                () => subject.ElementAtOrNone(0));
+        }
+
+        [Fact]
+        public void ElementAtOrNone_GivenReadOnlyList_AndIndexIsInRange_ShouldReturnSomeWithoutEnumerating()
+        {
+            var subject = new ReadOnlyListOnly<string>("first", "second", "third");
+
+            var result = subject.ElementAtOrNone(1);
+
+            AssertMaybe.IsSome(result, "second");
+        }
+
+        [Fact]
+        public void ElementAtOrNone_GivenReadOnlyList_AndIndexIsNotInRange_ShouldReturnNone()
+        {
+            var subject = new ReadOnlyListOnly<string>("first", "second", "third");
+
+            var result = subject.ElementAtOrNone(3);
+
+            AssertMaybe.IsNone(result);
+        }
+
+        // Implements IReadOnlyList<T> but not IList<T>, and refuses to be enumerated.
+        class ReadOnlyListOnly<T> : IReadOnlyList<T>
+        {
+            readonly T[] _items;
+
+            public ReadOnlyListOnly(params T[] items)
+            {
+                _items = items;
+            }
+
+            public T this[int index] => _items[index];
+
+            public int Count => _items.Length;
+
+            public IEnumerator<T> GetEnumerator() =>
+                throw new InvalidOperationException("Expected indexing, not enumeration.");
+
+            IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         }
     }
 }

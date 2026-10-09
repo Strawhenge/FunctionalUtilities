@@ -54,5 +54,49 @@ namespace FunctionalUtilities.Tests.MaybeTests
 
             Assert.Same(Maybe.None<int>(), result);
         }
+
+        [Fact]
+        public void Do_ShouldReturnSameInstance()
+        {
+            var subject = Maybe.None<object>();
+
+            var result = subject.Do(_ => { });
+
+            Assert.Same(subject, result);
+        }
+
+        [Fact]
+        public void Where_ShouldReturnNoneWithoutInvokingPredicate()
+        {
+            bool hasInvoked = false;
+
+            var subject = Maybe.None<string>();
+
+            var result = subject.Where(_ =>
+            {
+                hasInvoked = true;
+                return true;
+            });
+
+            AssertMaybe.IsNone(result);
+            Assert.False(hasInvoked);
+        }
+
+        [Fact]
+        public void HasSome_ShouldReturnFalse()
+        {
+            var subject = Maybe.None<string>();
+
+            Assert.False(subject.HasSome());
+        }
+
+        [Fact]
+        public void HasSome_ShouldReturnFalseAndDefaultValue()
+        {
+            var subject = Maybe.None<string>();
+
+            Assert.False(subject.HasSome(out var actual));
+            Assert.Null(actual);
+        }
     }
 }
