@@ -6,7 +6,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
     public class NoneTests
     {
         [Fact]
-        public void Reduce_ShouldReturnReducerResult()
+        public void Reduce_should_return_fallback_result()
         {
             var expected = "This is the string.";
 
@@ -19,7 +19,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         }
 
         [Fact]
-        public void Do_ShouldNotInvokeAction()
+        public void Do_should_not_invoke_action()
         {
             bool hasInvoked = false;
 
@@ -31,7 +31,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         }
 
         [Fact]
-        public void Map_ThenReduce_ShouldReturnReducerResult()
+        public void Map_then_reduce_should_return_fallback_result()
         {
             var expected = new object();
 
@@ -46,7 +46,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         }
 
         [Fact]
-        public void Map_ShouldReturnSharedNoneInstance()
+        public void Map_should_return_shared_none_instance()
         {
             var subject = Maybe.None<string>();
 
@@ -56,7 +56,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         }
 
         [Fact]
-        public void Do_ShouldReturnSameInstance()
+        public void Do_should_return_same_instance()
         {
             var subject = Maybe.None<object>();
 
@@ -66,7 +66,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         }
 
         [Fact]
-        public void Where_ShouldReturnNoneWithoutInvokingPredicate()
+        public void Where_should_return_none_without_invoking_predicate()
         {
             bool hasInvoked = false;
 
@@ -83,7 +83,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         }
 
         [Fact]
-        public void HasSome_ShouldReturnFalse()
+        public void HasSome_should_return_false()
         {
             var subject = Maybe.None<string>();
 
@@ -91,7 +91,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         }
 
         [Fact]
-        public void HasSome_ShouldReturnFalseAndDefaultValue()
+        public void HasSome_should_return_false_and_default_value()
         {
             var subject = Maybe.None<string>();
 

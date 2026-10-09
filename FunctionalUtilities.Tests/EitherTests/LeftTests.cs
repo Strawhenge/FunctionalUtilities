@@ -6,7 +6,7 @@ namespace FunctionalUtilities.Tests.EitherTests
     public class LeftTests
     {
         [Fact]
-        public void ReduceLeft_ShouldReturnExpectedString()
+        public void ReduceLeft_should_return_value()
         {
             var expected = "This is the string.";
 
@@ -20,7 +20,7 @@ namespace FunctionalUtilities.Tests.EitherTests
         }
 
         [Fact]
-        public void DoLeft_ShouldInvokeAction()
+        public void DoLeft_should_invoke_action()
         {
             bool hasInvoked = false;
 
@@ -31,7 +31,7 @@ namespace FunctionalUtilities.Tests.EitherTests
         }
 
         [Fact]
-        public void DoRight_ShouldNotInvokeAction()
+        public void DoRight_should_not_invoke_action()
         {
             bool hasInvoked = false;
 
@@ -42,7 +42,7 @@ namespace FunctionalUtilities.Tests.EitherTests
         }
 
         [Fact]
-        public void ImplicitOperator_ShouldCastLeftTypeToEither()
+        public void Implicit_conversion_should_convert_left_type_to_either()
         {
             Either<Exception, object> either = new Exception();
 
@@ -50,7 +50,7 @@ namespace FunctionalUtilities.Tests.EitherTests
         }
 
         [Fact]
-        public void ReduceRight_ShouldReturnReducerResult()
+        public void ReduceRight_should_return_reducer_result()
         {
             var subject = Either.Left<string, int>("abc");
 
@@ -60,7 +60,7 @@ namespace FunctionalUtilities.Tests.EitherTests
         }
 
         [Fact]
-        public void MapLeft_ShouldMapValue()
+        public void MapLeft_should_map_value()
         {
             var subject = Either.Left<string, object>("abc");
 
@@ -71,7 +71,7 @@ namespace FunctionalUtilities.Tests.EitherTests
         }
 
         [Fact]
-        public void MapRight_ShouldNotInvokeMapping()
+        public void MapRight_should_not_invoke_mapping()
         {
             var expected = "This is the string.";
 
@@ -84,7 +84,7 @@ namespace FunctionalUtilities.Tests.EitherTests
         }
 
         [Fact]
-        public void DoLeft_ShouldReturnSameInstance()
+        public void DoLeft_should_return_same_instance()
         {
             var subject = Either.Left<object, string>(new object());
 
@@ -94,7 +94,7 @@ namespace FunctionalUtilities.Tests.EitherTests
         }
 
         [Fact]
-        public void DoRight_ShouldReturnSameInstance()
+        public void DoRight_should_return_same_instance()
         {
             var subject = Either.Left<object, string>(new object());
 
@@ -104,7 +104,7 @@ namespace FunctionalUtilities.Tests.EitherTests
         }
 
         [Fact]
-        public void Left_GivenValueIsNull_ShouldThrow()
+        public void Left_should_throw_when_value_is_null()
         {
             Assert.Throws<ArgumentNullException>(
                 () => Either.Left<string, object>(null));

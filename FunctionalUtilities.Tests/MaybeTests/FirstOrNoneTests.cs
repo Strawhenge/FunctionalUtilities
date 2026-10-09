@@ -7,7 +7,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
     public class FirstOrNoneTests
     {
         [Fact]
-        public void FirstOrNone_GivenSequenceIsEmpty_ShouldReturnNone()
+        public void FirstOrNone_should_return_none_when_sequence_is_empty()
         {
             var subject = Array.Empty<int>();
 
@@ -21,7 +21,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         }
 
         [Fact]
-        public void FirstOrNone_GivenSequenceNotEmpty_ShouldReturnSome()
+        public void FirstOrNone_should_return_some_when_sequence_is_not_empty()
         {
             var subject = new[] { 10, 1, 2 };
 
@@ -32,7 +32,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         }
 
         [Fact]
-        public void FirstOrNone_GivenSequenceNotEmpty_AndPredicateMatches_ShouldReturnSome()
+        public void FirstOrNone_should_return_some_when_predicate_matches()
         {
             var subject = new[] { 10, 1, 2 };
 
@@ -43,7 +43,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         }
 
         [Fact]
-        public void FirstOrNone_GivenSequenceNotEmpty_AndPredicateDoesNotMatche_ShouldReturnNone()
+        public void FirstOrNone_should_return_none_when_predicate_does_not_match()
         {
             var subject = new[] { 10, 1, 2 };
 
@@ -53,7 +53,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         }
 
         [Fact]
-        public void FirstOrNone_GivenFirstElementIsNull_ShouldThrow()
+        public void FirstOrNone_should_throw_when_first_element_is_null()
         {
             var subject = new[] { null, "second" };
 
@@ -62,7 +62,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         }
 
         [Fact]
-        public void FirstOrNone_GivenFirstElementIsNullValueType_ShouldThrow()
+        public void FirstOrNone_should_throw_when_first_element_is_a_null_value_type()
         {
             var subject = new int?[] { null, 1 };
 
@@ -71,7 +71,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         }
 
         [Fact]
-        public void FirstOrNone_GivenFirstMatchingElementIsNull_ShouldThrow()
+        public void FirstOrNone_should_throw_when_first_matching_element_is_null()
         {
             var subject = new[] { "first", null, "third" };
 
@@ -80,7 +80,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         }
 
         [Fact]
-        public void FirstOrNone_GivenNullElementIsNotTheFirst_ShouldReturnSome()
+        public void FirstOrNone_should_return_some_when_null_element_is_not_the_first()
         {
             var subject = new[] { "first", null };
 
@@ -90,7 +90,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         }
 
         [Fact]
-        public void FirstOrNone_ShouldNotEnumeratePastFirstMatch()
+        public void FirstOrNone_should_not_enumerate_past_first_match()
         {
             IEnumerable<int> Sequence()
             {
@@ -104,7 +104,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         }
 
         [Fact]
-        public void FirstOrNone_ShouldEvaluatePredicateOncePerElement()
+        public void FirstOrNone_should_evaluate_predicate_once_per_element()
         {
             var subject = new[] { 1, 2, 3 };
             var calls = 0;
@@ -120,7 +120,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         }
 
         [Fact]
-        public void FirstOrNone_GivenPredicateIsNull_ShouldThrow()
+        public void FirstOrNone_should_throw_when_predicate_is_null()
         {
             var subject = new[] { 1 };
 
@@ -129,7 +129,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         }
 
         [Fact]
-        public void FirstOrNone_GivenSequenceIsNull_ShouldThrow()
+        public void FirstOrNone_should_throw_when_sequence_is_null()
         {
             int[] subject = null;
 

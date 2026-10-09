@@ -7,7 +7,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
     public class WhereSomeTests
     {
         [Fact]
-        public void WhereSome_ShouldReturnEmpty_WhenEmpty()
+        public void WhereSome_should_return_empty_when_sequence_is_empty()
         {
             var maybeStrings = Array.Empty<Maybe<string>>();
 
@@ -19,7 +19,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         }
 
         [Fact]
-        public void WhereSome_ShouldReturnEmpty_WhenOnlyContainsNone()
+        public void WhereSome_should_return_empty_when_sequence_only_contains_none()
         {
             var maybeStrings = new[]
             {
@@ -36,7 +36,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         }
 
         [Fact]
-        public void WhereSome_ShouldReturnAllValues_WhenContainsSomeAndNone()
+        public void WhereSome_should_return_all_values_when_sequence_contains_some_and_none()
         {
             const string hammer = "hammer";
             const string screwdriver = "screwdriver";
@@ -64,7 +64,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         }
 
         [Fact]
-        public void WhereSome_ShouldThrow_WhenSequenceIsNull()
+        public void WhereSome_should_throw_when_sequence_is_null()
         {
             Maybe<string>[] maybeStrings = null;
 
@@ -73,7 +73,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         }
 
         [Fact]
-        public void WhereSome_ShouldThrow_WhenSequenceContainsNull()
+        public void WhereSome_should_throw_when_sequence_contains_null()
         {
             var maybeStrings = new[]
             {

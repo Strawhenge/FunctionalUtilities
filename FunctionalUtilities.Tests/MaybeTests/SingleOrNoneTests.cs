@@ -6,7 +6,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
     public class SingleOrNoneTests
     {
         [Fact]
-        public void SingleOrNone_GivenSequenceIsEmpty_ShouldReturnNone()
+        public void SingleOrNone_should_return_none_when_sequence_is_empty()
         {
             var subject = Array.Empty<int>();
 
@@ -20,7 +20,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         }
 
         [Fact]
-        public void SingleOrNone_GivenSequenceHasOneItem_ShouldReturnSome()
+        public void SingleOrNone_should_return_some_when_sequence_has_one_element()
         {
             var subject = new[] { 10 };
 
@@ -31,7 +31,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         }
 
         [Fact]
-        public void SingleOrNone_GivenSequenceHasMoreThanOneElement_ShouldThrow()
+        public void SingleOrNone_should_throw_when_sequence_has_more_than_one_element()
         {
             var subject = new[] { 1, 0 };
 
@@ -40,7 +40,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         }
 
         [Fact]
-        public void SingleOrNone_GivenSequenceHasMoreThanOneElement_AndPredicateDoesNotMatch_ShouldReturnNone()
+        public void SingleOrNone_should_return_none_when_predicate_does_not_match()
         {
             var subject = new[] { 1, 0 };
 
@@ -50,7 +50,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         }
 
         [Fact]
-        public void SingleOrNone_GivenPredicateMatchesOneElement_ShouldReturnSome()
+        public void SingleOrNone_should_return_some_when_predicate_matches_one_element()
         {
             var subject = new[] { 1, 6, 3 };
 
@@ -61,7 +61,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         }
 
         [Fact]
-        public void SingleOrNone_GivenPredicateMatchesMoreThanOneElement_ShouldThrow()
+        public void SingleOrNone_should_throw_when_predicate_matches_more_than_one_element()
         {
             var subject = new[] { 1, 1, 0 };
 
@@ -70,7 +70,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         }
 
         [Fact]
-        public void SingleOrNone_GivenSingleElementIsNull_ShouldThrow()
+        public void SingleOrNone_should_throw_when_single_element_is_null()
         {
             var subject = new string[] { null };
 
@@ -79,7 +79,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         }
 
         [Fact]
-        public void SingleOrNone_GivenSingleMatchingElementIsNull_ShouldThrow()
+        public void SingleOrNone_should_throw_when_single_matching_element_is_null()
         {
             var subject = new[] { "first", null };
 
@@ -88,7 +88,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         }
 
         [Fact]
-        public void SingleOrNone_ShouldEvaluatePredicateOncePerElement()
+        public void SingleOrNone_should_evaluate_predicate_once_per_element()
         {
             var subject = new[] { 1, 2, 3 };
             var calls = 0;
@@ -104,7 +104,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         }
 
         [Fact]
-        public void SingleOrNone_GivenPredicateIsNull_ShouldThrow()
+        public void SingleOrNone_should_throw_when_predicate_is_null()
         {
             var subject = new[] { 1 };
 
@@ -113,7 +113,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         }
 
         [Fact]
-        public void SingleOrNone_GivenSequenceIsNull_ShouldThrow()
+        public void SingleOrNone_should_throw_when_sequence_is_null()
         {
             int[] subject = null;
 
