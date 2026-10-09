@@ -44,5 +44,15 @@ namespace FunctionalUtilities.Tests.MaybeTests
             Assert.NotNull(actual);
             Assert.Equal(expected, actual);
         }
+
+        [Fact]
+        public void Map_ShouldReturnSharedNoneInstance()
+        {
+            var subject = Maybe.None<string>();
+
+            var result = subject.Map(x => x.Length);
+
+            Assert.Same(Maybe.None<int>(), result);
+        }
     }
 }
