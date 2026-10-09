@@ -10,7 +10,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         {
             int? result = Maybe.Some(5).ToNullable();
 
-            Assert.Equal((int?)5, result);
+            Assert.Equal(5, result);
         }
 
         [Fact]

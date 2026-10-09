@@ -6,7 +6,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
     public class SomeTests
     {
         [Fact]
-        public void Reduce_ShouldReturnExpected()
+        public void Reduce_should_return_value()
         {
             var expected = "This is the string.";
 
@@ -20,7 +20,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         }
 
         [Fact]
-        public void Do_ShouldInvokeAction()
+        public void Do_should_invoke_action()
         {
             bool hasInvoked = false;
 
@@ -32,7 +32,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         }
 
         [Fact]
-        public void Map_ThenReduce_ShouldReturnMappingResult()
+        public void Map_then_reduce_should_return_mapping_result()
         {
             var expected = new object();
 
@@ -47,7 +47,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         }
 
         [Fact]
-        public void Do_ShouldReturnSameInstance()
+        public void Do_should_return_same_instance()
         {
             var subject = Maybe.Some(new object());
 
@@ -57,7 +57,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         }
 
         [Fact]
-        public void Where_GivenPredicateIsTrue_ShouldReturnSameInstance()
+        public void Where_should_return_same_instance_when_predicate_is_true()
         {
             var subject = Maybe.Some("This is a string.");
 
@@ -67,7 +67,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         }
 
         [Fact]
-        public void Where_GivenPredicateIsFalse_ShouldReturnNone()
+        public void Where_should_return_none_when_predicate_is_false()
         {
             var subject = Maybe.Some("This is a string.");
 
@@ -77,7 +77,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         }
 
         [Fact]
-        public void HasSome_ShouldReturnTrue()
+        public void HasSome_should_return_true()
         {
             var subject = Maybe.Some("This is a string.");
 
@@ -85,7 +85,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         }
 
         [Fact]
-        public void HasSome_ShouldReturnTrueAndValue()
+        public void HasSome_should_return_true_and_value()
         {
             var expected = "This is a string.";
 

@@ -6,7 +6,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
     public class AsEnumerableTests
     {
         [Fact]
-        public void AsEnumerable_GivenNone_ShouldReturnEmptyEnumerable()
+        public void AsEnumerable_should_return_empty_enumerable_for_none()
         {
             var subject = Maybe.None<object>();
 
@@ -17,7 +17,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         }
 
         [Fact]
-        public void AsEnumerable_GivenSome_ShouldReturnEnumerableWithSingleItem()
+        public void AsEnumerable_should_return_enumerable_with_single_item_for_some()
         {
             var item = new object();
             var subject = Maybe.Some(item);

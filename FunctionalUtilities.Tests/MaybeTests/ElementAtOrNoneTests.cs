@@ -11,7 +11,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         [InlineData(0)]
         [InlineData(10)]
         [InlineData(-100)]
-        public void ElementAtOrNone_GivenEnumerableIsEmpty_ShouldReturnNone(int index)
+        public void ElementAtOrNone_should_return_none_when_sequence_is_empty(int index)
         {
             var subject = Array.Empty<int>();
 
@@ -24,7 +24,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         [InlineData(100)]
         [InlineData(-1)]
         [InlineData(-19)]
-        public void ElementAtOrNone_GivenIndexIsNotInRange_ShouldReturnNone(int index)
+        public void ElementAtOrNone_should_return_none_when_index_is_not_in_range(int index)
         {
             var subject = new[] { "first", "second", "third" };
 
@@ -37,7 +37,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         [InlineData(0, "first")]
         [InlineData(1, "second")]
         [InlineData(2, "third")]
-        public void ElementAtOrNone_GivenIndexIsInRange_ShouldReturnMaybeWithCorrectValue(int index, string expectedResult)
+        public void ElementAtOrNone_should_return_some_when_index_is_in_range(int index, string expectedResult)
         {
             var subject = new[] { "first", "second", "third" };
 
@@ -50,7 +50,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         }
 
         [Fact]
-        public void ElementAtOrNone_GivenElementAtIndexIsNull_ShouldThrow()
+        public void ElementAtOrNone_should_throw_when_element_at_index_is_null()
         {
             var subject = new[] { "first", null, "third" };
 
@@ -59,7 +59,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         }
 
         [Fact]
-        public void ElementAtOrNone_ShouldNotEnumeratePastIndex()
+        public void ElementAtOrNone_should_not_enumerate_past_index()
         {
             IEnumerable<string> Sequence()
             {
@@ -74,7 +74,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         }
 
         [Fact]
-        public void ElementAtOrNone_GivenLazySequence_AndIndexIsNotInRange_ShouldReturnNone()
+        public void ElementAtOrNone_should_return_none_when_index_is_not_in_range_of_lazy_sequence()
         {
             IEnumerable<string> Sequence()
             {
@@ -88,7 +88,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         }
 
         [Fact]
-        public void ElementAtOrNone_GivenSequenceIsNull_ShouldThrow()
+        public void ElementAtOrNone_should_throw_when_sequence_is_null()
         {
             int[] subject = null;
 
@@ -97,7 +97,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         }
 
         [Fact]
-        public void ElementAtOrNone_GivenReadOnlyList_AndIndexIsInRange_ShouldReturnSomeWithoutEnumerating()
+        public void ElementAtOrNone_should_return_some_without_enumerating_when_index_is_in_range_of_read_only_list()
         {
             var subject = new ReadOnlyListOnly<string>("first", "second", "third");
 
@@ -107,7 +107,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         }
 
         [Fact]
-        public void ElementAtOrNone_GivenReadOnlyList_AndIndexIsNotInRange_ShouldReturnNone()
+        public void ElementAtOrNone_should_return_none_when_index_is_not_in_range_of_read_only_list()
         {
             var subject = new ReadOnlyListOnly<string>("first", "second", "third");
 

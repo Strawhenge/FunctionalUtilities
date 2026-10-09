@@ -117,7 +117,7 @@ namespace FunctionalUtilities.Tests
             Assert.True(hasUser);
             Assert.True(isAdmin);
             Assert.Equal("Ada", cast.Name);
-            Assert.Equal((int?)5, asNullable);
+            Assert.Equal(5, asNullable);
             Assert.False(FindUser(7).WhereHas(u => u.IsAdmin));
             Assert.Throws<InvalidCastException>(() => (User)FindUser(7));
         }

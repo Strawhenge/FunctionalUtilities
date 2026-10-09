@@ -6,7 +6,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
     public class OperatorTests
     {
         [Fact]
-        public void ImplicitOperator_ShouldCastToMaybe()
+        public void Implicit_conversion_should_return_some()
         {
             Maybe<Exception> maybe = new Exception();
 
@@ -14,7 +14,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         }
 
         [Fact]
-        public void ExplicitOperator_WhenSome_ShouldCast()
+        public void Explicit_conversion_should_return_value_for_some()
         {
             const string text = "This is the string.";
 
@@ -26,7 +26,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
         }
 
         [Fact]
-        public void ExplicitOperator_WhenNone_ShouldThrow()
+        public void Explicit_conversion_should_throw_for_none()
         {
             var maybe = Maybe.None<string>();
 

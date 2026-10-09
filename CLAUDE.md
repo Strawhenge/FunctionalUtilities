@@ -28,7 +28,8 @@ A small C# library providing `Maybe<T>` and `Either<TLeft, TRight>`. It ships as
 - Extension methods on reference types throw `ArgumentNullException` when their `this` argument is null.
 - Every method that takes a function throws `ArgumentNullException` naming that parameter when the function is null, whether or not it would have been called.
 - When a function must not return null and does (`Map`, `MapLeft`, `MapRight`, `Combine`), the method throws `ArgumentNullException` naming the function parameter, with a message saying it returned null.
-- Tests live in one class per feature under `MaybeTests/` or `EitherTests/`, and use the `AssertMaybe` and `AssertEither` helpers. Two naming styles exist (`Method_GivenX_ShouldY` and `Sentence_in_snake_case`); match the file being edited.
+- Tests live in one class per feature under `MaybeTests/` or `EitherTests/`, and use the `AssertMaybe` and `AssertEither` helpers.
+- Test names are snake_case sentences of the form `Subject_should_outcome_when_condition`, for example `FirstOrNone_should_return_none_when_sequence_is_empty`. The subject is the method under test, kept in its own casing, or the state when the class is named for the method (`None_should_return_false` in `WhereHasTests`).
 - Tests that expect an exception assert its type only, not its parameter name or message.
 
 ## Working on changes
