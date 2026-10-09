@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Xunit;
 
 namespace FunctionalUtilities.Tests.MaybeTests
@@ -56,6 +57,35 @@ namespace FunctionalUtilities.Tests.MaybeTests
                 () => subject.ElementAtOrNone(1));
 
             Assert.Equal("enumerable", exception.ParamName);
+        }
+
+        [Fact]
+        public void ElementAtOrNone_ShouldNotEnumeratePastIndex()
+        {
+            IEnumerable<string> Sequence()
+            {
+                yield return "first";
+                yield return "second";
+                throw new InvalidOperationException("Enumerated past the index.");
+            }
+
+            var result = Sequence().ElementAtOrNone(1);
+
+            AssertMaybe.IsSome(result, "second");
+        }
+
+        [Fact]
+        public void ElementAtOrNone_GivenLazySequence_AndIndexIsNotInRange_ShouldReturnNone()
+        {
+            IEnumerable<string> Sequence()
+            {
+                yield return "first";
+                yield return "second";
+            }
+
+            var result = Sequence().ElementAtOrNone(2);
+
+            AssertMaybe.IsNone(result);
         }
     }
 }
