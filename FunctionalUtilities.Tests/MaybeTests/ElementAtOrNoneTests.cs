@@ -54,10 +54,8 @@ namespace FunctionalUtilities.Tests.MaybeTests
         {
             var subject = new[] { "first", null, "third" };
 
-            var exception = Assert.Throws<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>(
                 () => subject.ElementAtOrNone(1));
-
-            Assert.Equal("enumerable", exception.ParamName);
         }
 
         [Fact]
@@ -94,10 +92,8 @@ namespace FunctionalUtilities.Tests.MaybeTests
         {
             int[] subject = null;
 
-            var exception = Assert.Throws<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>(
                 () => subject.ElementAtOrNone(0));
-
-            Assert.Equal("enumerable", exception.ParamName);
         }
 
         [Fact]

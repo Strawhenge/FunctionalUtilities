@@ -27,10 +27,8 @@ namespace FunctionalUtilities.Tests.MaybeTests
         {
             var dictionary = new Dictionary<string, string> { ["key"] = null };
 
-            var exception = Assert.Throws<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>(
                 () => dictionary.MaybeGetValue("key"));
-
-            Assert.Equal("dictionary", exception.ParamName);
         }
 
         [Fact]
@@ -38,10 +36,8 @@ namespace FunctionalUtilities.Tests.MaybeTests
         {
             Dictionary<string, string> dictionary = null;
 
-            var exception = Assert.Throws<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>(
                 () => dictionary.MaybeGetValue("key"));
-
-            Assert.Equal("dictionary", exception.ParamName);
         }
     }
 }

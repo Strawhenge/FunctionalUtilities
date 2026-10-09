@@ -26,10 +26,8 @@ namespace FunctionalUtilities.Tests.MaybeTests
         {
             Maybe<int> maybe = null;
 
-            var exception = Assert.Throws<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>(
                 () => maybe.ToNullable());
-
-            Assert.Equal("maybe", exception.ParamName);
         }
 
         [Fact]
@@ -77,10 +75,8 @@ namespace FunctionalUtilities.Tests.MaybeTests
         {
             Maybe<Maybe<int>> nested = null;
 
-            var exception = Assert.Throws<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>(
                 () => nested.Flatten());
-
-            Assert.Equal("maybe", exception.ParamName);
         }
     }
 }

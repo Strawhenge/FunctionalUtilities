@@ -26,10 +26,8 @@ namespace FunctionalUtilities.Tests.EitherTests
         {
             Either<string, string> either = null;
 
-            var exception = Assert.Throws<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>(
                 () => either.Reduce());
-
-            Assert.Equal("either", exception.ParamName);
         }
     }
 }

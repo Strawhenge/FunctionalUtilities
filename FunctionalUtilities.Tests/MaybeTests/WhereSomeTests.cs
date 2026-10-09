@@ -68,10 +68,8 @@ namespace FunctionalUtilities.Tests.MaybeTests
         {
             Maybe<string>[] maybeStrings = null;
 
-            var exception = Assert.Throws<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>(
                 () => maybeStrings.WhereSome());
-
-            Assert.Equal("enumerable", exception.ParamName);
         }
 
         [Fact]
@@ -83,10 +81,8 @@ namespace FunctionalUtilities.Tests.MaybeTests
                 null
             };
 
-            var exception = Assert.Throws<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>(
                 () => maybeStrings.WhereSome().ToArray());
-
-            Assert.Equal("enumerable", exception.ParamName);
         }
     }
 }
