@@ -17,7 +17,7 @@ namespace FunctionalUtilities
 
             return index >= array.Length
                 ? Maybe.None<T>()
-                : Maybe.Some(array[index]);
+                : SomeElement(array[index], nameof(enumerable));
         }
 
         public static Maybe<T> FirstOrNone<T>(this IEnumerable<T> enumerable) =>
@@ -31,7 +31,7 @@ namespace FunctionalUtilities
             var array = enumerable.ToArray();
 
             return array.Any(predicate)
-                ? array.First(predicate)
+                ? SomeElement(array.First(predicate), nameof(enumerable))
                 : Maybe.None<T>();
         }
 
@@ -46,7 +46,7 @@ namespace FunctionalUtilities
             var array = enumerable.ToArray();
 
             return array.Any(predicate)
-                ? array.Single(predicate)
+                ? SomeElement(array.Single(predicate), nameof(enumerable))
                 : Maybe.None<T>();
         }
 
@@ -68,6 +68,16 @@ namespace FunctionalUtilities
                         yield return value;
                 }
             }
+        }
+
+        static Maybe<T> SomeElement<T>(T element, string paramName)
+        {
+            if (element == null)
+                throw new ArgumentNullException(
+                    paramName,
+                    "The element found in the sequence is null. A Maybe cannot hold null.");
+
+            return Maybe.Some(element);
         }
     }
 }
