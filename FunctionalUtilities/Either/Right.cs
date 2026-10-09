@@ -24,8 +24,17 @@ namespace FunctionalUtilities
         public override Either<TNewLeft, TRight> MapLeft<TNewLeft>(Func<TLeft, TNewLeft> mapping) =>
             new Right<TNewLeft, TRight>(_value);
 
-        public override Either<TLeft, TNewRight> MapRight<TNewRight>(Func<TRight, TNewRight> mapping) =>
-            new Right<TLeft, TNewRight>(mapping(_value));
+        public override Either<TLeft, TNewRight> MapRight<TNewRight>(Func<TRight, TNewRight> mapping)
+        {
+            var result = mapping(_value);
+
+            if (result == null)
+                throw new ArgumentNullException(
+                    nameof(mapping),
+                    "The mapping function returned null. An Either cannot hold null.");
+
+            return new Right<TLeft, TNewRight>(result);
+        }
 
         public override TLeft ReduceLeft(Func<TRight, TLeft> mapping) => mapping(_value);
 

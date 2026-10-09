@@ -21,7 +21,18 @@ namespace FunctionalUtilities
             return this;
         }
 
-        public override Maybe<TNew> Map<TNew>(Func<T, TNew> mapping) => new Some<TNew>(mapping(_value));
+        public override Maybe<TNew> Map<TNew>(Func<T, TNew> mapping)
+        {
+            var result = mapping(_value);
+
+            if (result == null)
+                throw new ArgumentNullException(
+                    nameof(mapping),
+                    "The mapping function returned null. A Maybe cannot hold null. " +
+                    "To map to a value that might be null, return Maybe.NotNull(...) and call Flatten().");
+
+            return new Some<TNew>(result);
+        }
 
         public override Maybe<T> Where(Func<T, bool> predicate) =>
             predicate(_value) ? this : Maybe.None<T>();
