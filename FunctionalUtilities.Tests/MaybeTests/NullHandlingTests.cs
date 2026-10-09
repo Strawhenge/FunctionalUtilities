@@ -40,5 +40,56 @@ namespace FunctionalUtilities.Tests.MaybeTests
             Assert.Equal("combineWith", exception.ParamName);
             Assert.Contains("returned null", exception.Message);
         }
+
+        [Fact]
+        public void Do_should_throw_when_action_is_null()
+        {
+            AssertThrowsForSomeAndNone("action", maybe => maybe.Do(null));
+        }
+
+        [Fact]
+        public void Map_should_throw_when_mapping_is_null()
+        {
+            AssertThrowsForSomeAndNone("mapping", maybe => maybe.Map<int>(null));
+        }
+
+        [Fact]
+        public void Where_should_throw_when_predicate_is_null()
+        {
+            AssertThrowsForSomeAndNone("predicate", maybe => maybe.Where(null));
+        }
+
+        [Fact]
+        public void WhereHas_should_throw_when_predicate_is_null()
+        {
+            AssertThrowsForSomeAndNone("predicate", maybe => maybe.WhereHas(null));
+        }
+
+        [Fact]
+        public void Combine_should_throw_when_function_is_null()
+        {
+            AssertThrowsForSomeAndNone("combineWith", maybe => maybe.Combine(null));
+        }
+
+        [Fact]
+        public void Reduce_should_throw_when_fallback_is_null()
+        {
+            AssertThrowsForSomeAndNone("fallback", maybe => maybe.Reduce(null));
+        }
+
+        static void AssertThrowsForSomeAndNone(string paramName, Action<Maybe<string>> act)
+        {
+            var maybes = new[]
+            {
+                Maybe.Some("text"),
+                Maybe.None<string>()
+            };
+
+            foreach (var maybe in maybes)
+            {
+                var exception = Assert.Throws<ArgumentNullException>(() => act(maybe));
+
+                Assert.Equal(paramName, exception.ParamName);
+            }
     }
 }
