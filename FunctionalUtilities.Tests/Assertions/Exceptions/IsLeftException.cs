@@ -2,9 +2,9 @@
 
 namespace FunctionalUtilities.Tests
 {
-    class IsLeftException : AssertActualExpectedException
+    class IsLeftException : XunitException
     {
-        public IsLeftException(object left) : base("Right", "Left", "Expected Right but was Left.")
+        public IsLeftException(object left) : base("Expected Right but was Left.")
         {
             Left = left;
         }
