@@ -17,16 +17,44 @@ namespace FunctionalUtilities
 
         public override Maybe<T> Do(Action<T> action)
         {
+            if (action == null)
+                throw new ArgumentNullException(nameof(action));
+
             action(_value);
             return this;
         }
 
-        public override Maybe<TNew> Map<TNew>(Func<T, TNew> mapping) => new Some<TNew>(mapping(_value));
+        public override Maybe<TNew> Map<TNew>(Func<T, TNew> mapping)
+        {
+            if (mapping == null)
+                throw new ArgumentNullException(nameof(mapping));
 
-        public override Maybe<T> Where(Func<T, bool> predicate) =>
-            predicate(_value) ? this : Maybe.None<T>();
+            var result = mapping(_value);
 
-        public override Maybe<T> Combine(Func<Maybe<T>> combineWith) => this;
+            if (result == null)
+                throw new ArgumentNullException(
+                    nameof(mapping),
+                    "The mapping function returned null. A Maybe cannot hold null. " +
+                    "To map to a value that might be null, return Maybe.NotNull(...) and call Flatten().");
+
+            return new Some<TNew>(result);
+        }
+
+        public override Maybe<T> Where(Func<T, bool> predicate)
+        {
+            if (predicate == null)
+                throw new ArgumentNullException(nameof(predicate));
+
+            return predicate(_value) ? this : Maybe.None<T>();
+        }
+
+        public override Maybe<T> Combine(Func<Maybe<T>> combineWith)
+        {
+            if (combineWith == null)
+                throw new ArgumentNullException(nameof(combineWith));
+
+            return this;
+        }
 
         public override bool HasSome() => true;
 
@@ -36,9 +64,21 @@ namespace FunctionalUtilities
             return true;
         }
 
-        public override bool WhereHas(Func<T, bool> predicate) => predicate(_value);
+        public override bool WhereHas(Func<T, bool> predicate)
+        {
+            if (predicate == null)
+                throw new ArgumentNullException(nameof(predicate));
 
-        public override T Reduce(Func<T> fallback) => _value;
+            return predicate(_value);
+        }
+
+        public override T Reduce(Func<T> fallback)
+        {
+            if (fallback == null)
+                throw new ArgumentNullException(nameof(fallback));
+
+            return _value;
+        }
 
         public override IEnumerable<T> AsEnumerable()
         {

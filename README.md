@@ -49,7 +49,7 @@ int? nullable = 5;
 Maybe<int> fromNullable = nullable.ToMaybe();
 ```
 
-`Maybe.Some(null)` throws `ArgumentNullException`. Use `Maybe.NotNull` when the value might be null.
+`Maybe.Some(null)` and the implicit conversion both throw `ArgumentNullException` for null. Use `Maybe.NotNull` when the value might be null.
 
 ### Transforming and unwrapping
 
@@ -65,7 +65,7 @@ string greeting = FindUser(42)
     .Reduce(() => "Hello, guest");
 ```
 
-The function given to `Map` must not return null. When it might, map to a `Maybe` and flatten:
+The function given to `Map` must not return null; if it does, `Map` throws `ArgumentNullException`. When it might, map to a `Maybe` and flatten:
 
 ```csharp
 Maybe<string> email = FindUser(42)
