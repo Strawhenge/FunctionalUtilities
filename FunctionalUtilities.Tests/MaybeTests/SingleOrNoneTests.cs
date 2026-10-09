@@ -68,5 +68,27 @@ namespace FunctionalUtilities.Tests.MaybeTests
             Assert.Throws<InvalidOperationException>(
                 () => subject.SingleOrNone(x => x == 1));
         }
+
+        [Fact]
+        public void SingleOrNone_GivenSingleElementIsNull_ShouldThrow()
+        {
+            var subject = new string[] { null };
+
+            var exception = Assert.Throws<ArgumentNullException>(
+                () => subject.SingleOrNone());
+
+            Assert.Equal("enumerable", exception.ParamName);
+        }
+
+        [Fact]
+        public void SingleOrNone_GivenSingleMatchingElementIsNull_ShouldThrow()
+        {
+            var subject = new[] { "first", null };
+
+            var exception = Assert.Throws<ArgumentNullException>(
+                () => subject.SingleOrNone(x => x != "first"));
+
+            Assert.Equal("enumerable", exception.ParamName);
+        }
     }
 }

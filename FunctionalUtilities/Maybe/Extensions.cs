@@ -33,9 +33,15 @@ namespace FunctionalUtilities
             if (dictionary == null)
                 throw new ArgumentNullException(nameof(dictionary));
 
-            return dictionary.TryGetValue(key, out var value)
-                ? Maybe.Some(value)
-                : Maybe.None<TValue>();
+            if (!dictionary.TryGetValue(key, out var value))
+                return Maybe.None<TValue>();
+
+            if (value == null)
+                throw new ArgumentNullException(
+                    nameof(dictionary),
+                    "The dictionary holds a null value for the key. A Maybe cannot hold null.");
+
+            return Maybe.Some(value);
         }
     }
 }
