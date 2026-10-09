@@ -12,16 +12,39 @@ namespace FunctionalUtilities
         {
         }
 
-        public override Maybe<T> Do(Action<T> action) => this;
+        public override Maybe<T> Do(Action<T> action)
+        {
+            if (action == null)
+                throw new ArgumentNullException(nameof(action));
 
-        public override Maybe<TNew> Map<TNew>(Func<T, TNew> mapping) => None<TNew>.Instance;
+            return this;
+        }
 
-        public override Maybe<T> Where(Func<T, bool> predicate) => this;
+        public override Maybe<TNew> Map<TNew>(Func<T, TNew> mapping)
+        {
+            if (mapping == null)
+                throw new ArgumentNullException(nameof(mapping));
 
-        public override Maybe<T> Combine(Func<Maybe<T>> combineWith) =>
-            combineWith() ?? throw new ArgumentNullException(
+            return None<TNew>.Instance;
+        }
+
+        public override Maybe<T> Where(Func<T, bool> predicate)
+        {
+            if (predicate == null)
+                throw new ArgumentNullException(nameof(predicate));
+
+            return this;
+        }
+
+        public override Maybe<T> Combine(Func<Maybe<T>> combineWith)
+        {
+            if (combineWith == null)
+                throw new ArgumentNullException(nameof(combineWith));
+
+            return combineWith() ?? throw new ArgumentNullException(
                 nameof(combineWith),
                 "The function given to Combine returned null. Return Maybe.None<T>() when there is no value.");
+        }
 
         public override bool HasSome() => false;
 
@@ -31,9 +54,21 @@ namespace FunctionalUtilities
             return false;
         }
 
-        public override bool WhereHas(Func<T, bool> predicate) => false;
+        public override bool WhereHas(Func<T, bool> predicate)
+        {
+            if (predicate == null)
+                throw new ArgumentNullException(nameof(predicate));
 
-        public override T Reduce(Func<T> fallback) => fallback();
+            return false;
+        }
+
+        public override T Reduce(Func<T> fallback)
+        {
+            if (fallback == null)
+                throw new ArgumentNullException(nameof(fallback));
+
+            return fallback();
+        }
 
         public override IEnumerable<T> AsEnumerable() => Enumerable.Empty<T>();
     }

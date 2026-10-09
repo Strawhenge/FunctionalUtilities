@@ -15,14 +15,26 @@ namespace FunctionalUtilities
 
         public override Either<TLeft, TRight> DoLeft(Action<TLeft> action)
         {
+            if (action == null)
+                throw new ArgumentNullException(nameof(action));
+
             action(_value);
             return this;
         }
 
-        public override Either<TLeft, TRight> DoRight(Action<TRight> action) => this;
+        public override Either<TLeft, TRight> DoRight(Action<TRight> action)
+        {
+            if (action == null)
+                throw new ArgumentNullException(nameof(action));
+
+            return this;
+        }
 
         public override Either<TNewLeft, TRight> MapLeft<TNewLeft>(Func<TLeft, TNewLeft> mapping)
         {
+            if (mapping == null)
+                throw new ArgumentNullException(nameof(mapping));
+
             var result = mapping(_value);
 
             if (result == null)
@@ -33,11 +45,28 @@ namespace FunctionalUtilities
             return new Left<TNewLeft, TRight>(result);
         }
 
-        public override Either<TLeft, TNewRight> MapRight<TNewRight>(Func<TRight, TNewRight> mapping) =>
-            new Left<TLeft, TNewRight>(_value);
+        public override Either<TLeft, TNewRight> MapRight<TNewRight>(Func<TRight, TNewRight> mapping)
+        {
+            if (mapping == null)
+                throw new ArgumentNullException(nameof(mapping));
 
-        public override TLeft ReduceLeft(Func<TRight, TLeft> mapping) => _value;
+            return new Left<TLeft, TNewRight>(_value);
+        }
 
-        public override TRight ReduceRight(Func<TLeft, TRight> mapping) => mapping(_value);
+        public override TLeft ReduceLeft(Func<TRight, TLeft> reducer)
+        {
+            if (reducer == null)
+                throw new ArgumentNullException(nameof(reducer));
+
+            return _value;
+        }
+
+        public override TRight ReduceRight(Func<TLeft, TRight> reducer)
+        {
+            if (reducer == null)
+                throw new ArgumentNullException(nameof(reducer));
+
+            return reducer(_value);
+        }
     }
 }

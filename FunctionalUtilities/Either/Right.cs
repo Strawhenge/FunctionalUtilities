@@ -13,19 +13,36 @@ namespace FunctionalUtilities
             _value = value;
         }
 
-        public override Either<TLeft, TRight> DoLeft(Action<TLeft> action) => this;
+        public override Either<TLeft, TRight> DoLeft(Action<TLeft> action)
+        {
+            if (action == null)
+                throw new ArgumentNullException(nameof(action));
+
+            return this;
+        }
 
         public override Either<TLeft, TRight> DoRight(Action<TRight> action)
         {
+            if (action == null)
+                throw new ArgumentNullException(nameof(action));
+
             action(_value);
             return this;
         }
 
-        public override Either<TNewLeft, TRight> MapLeft<TNewLeft>(Func<TLeft, TNewLeft> mapping) =>
-            new Right<TNewLeft, TRight>(_value);
+        public override Either<TNewLeft, TRight> MapLeft<TNewLeft>(Func<TLeft, TNewLeft> mapping)
+        {
+            if (mapping == null)
+                throw new ArgumentNullException(nameof(mapping));
+
+            return new Right<TNewLeft, TRight>(_value);
+        }
 
         public override Either<TLeft, TNewRight> MapRight<TNewRight>(Func<TRight, TNewRight> mapping)
         {
+            if (mapping == null)
+                throw new ArgumentNullException(nameof(mapping));
+
             var result = mapping(_value);
 
             if (result == null)
@@ -36,8 +53,20 @@ namespace FunctionalUtilities
             return new Right<TLeft, TNewRight>(result);
         }
 
-        public override TLeft ReduceLeft(Func<TRight, TLeft> mapping) => mapping(_value);
+        public override TLeft ReduceLeft(Func<TRight, TLeft> reducer)
+        {
+            if (reducer == null)
+                throw new ArgumentNullException(nameof(reducer));
 
-        public override TRight ReduceRight(Func<TLeft, TRight> mapping) => _value;
+            return reducer(_value);
+        }
+
+        public override TRight ReduceRight(Func<TLeft, TRight> reducer)
+        {
+            if (reducer == null)
+                throw new ArgumentNullException(nameof(reducer));
+
+            return _value;
+        }
     }
 }
