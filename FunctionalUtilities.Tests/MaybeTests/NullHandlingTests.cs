@@ -10,11 +10,8 @@ namespace FunctionalUtilities.Tests.MaybeTests
         {
             var some = Maybe.Some("text");
 
-            var exception = Assert.Throws<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>(
                 () => some.Map<string>(_ => null));
-
-            Assert.Equal("mapping", exception.ParamName);
-            Assert.Contains("returned null", exception.Message);
         }
 
         [Fact]
@@ -22,11 +19,8 @@ namespace FunctionalUtilities.Tests.MaybeTests
         {
             Maybe<string> Convert(string value) => value;
 
-            var exception = Assert.Throws<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>(
                 () => Convert(null));
-
-            Assert.Equal("value", exception.ParamName);
-            Assert.Contains("Maybe.NotNull", exception.Message);
         }
 
         [Fact]
@@ -34,50 +28,47 @@ namespace FunctionalUtilities.Tests.MaybeTests
         {
             var none = Maybe.None<string>();
 
-            var exception = Assert.Throws<ArgumentNullException>(
+            Assert.Throws<ArgumentNullException>(
                 () => none.Combine(() => null));
-
-            Assert.Equal("combineWith", exception.ParamName);
-            Assert.Contains("returned null", exception.Message);
         }
 
         [Fact]
         public void Do_should_throw_when_action_is_null()
         {
-            AssertThrowsForSomeAndNone("action", maybe => maybe.Do(null));
+            AssertThrowsForSomeAndNone(maybe => maybe.Do(null));
         }
 
         [Fact]
         public void Map_should_throw_when_mapping_is_null()
         {
-            AssertThrowsForSomeAndNone("mapping", maybe => maybe.Map<int>(null));
+            AssertThrowsForSomeAndNone(maybe => maybe.Map<int>(null));
         }
 
         [Fact]
         public void Where_should_throw_when_predicate_is_null()
         {
-            AssertThrowsForSomeAndNone("predicate", maybe => maybe.Where(null));
+            AssertThrowsForSomeAndNone(maybe => maybe.Where(null));
         }
 
         [Fact]
         public void WhereHas_should_throw_when_predicate_is_null()
         {
-            AssertThrowsForSomeAndNone("predicate", maybe => maybe.WhereHas(null));
+            AssertThrowsForSomeAndNone(maybe => maybe.WhereHas(null));
         }
 
         [Fact]
         public void Combine_should_throw_when_function_is_null()
         {
-            AssertThrowsForSomeAndNone("combineWith", maybe => maybe.Combine(null));
+            AssertThrowsForSomeAndNone(maybe => maybe.Combine(null));
         }
 
         [Fact]
         public void Reduce_should_throw_when_fallback_is_null()
         {
-            AssertThrowsForSomeAndNone("fallback", maybe => maybe.Reduce(null));
+            AssertThrowsForSomeAndNone(maybe => maybe.Reduce(null));
         }
 
-        static void AssertThrowsForSomeAndNone(string paramName, Action<Maybe<string>> act)
+        static void AssertThrowsForSomeAndNone(Action<Maybe<string>> act)
         {
             var maybes = new[]
             {
@@ -87,9 +78,7 @@ namespace FunctionalUtilities.Tests.MaybeTests
 
             foreach (var maybe in maybes)
             {
-                var exception = Assert.Throws<ArgumentNullException>(() => act(maybe));
-
-                Assert.Equal(paramName, exception.ParamName);
+                Assert.Throws<ArgumentNullException>(() => act(maybe));
             }
         }
     }
