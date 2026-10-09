@@ -2,9 +2,9 @@
 
 namespace FunctionalUtilities.Tests
 {
-    class IsNoneException : AssertActualExpectedException
+    class IsNoneException : XunitException
     {
-        public IsNoneException() : base("Some", "None", "Expected Some but was None")
+        public IsNoneException() : base("Expected Some but was None")
         {
         }
     }
